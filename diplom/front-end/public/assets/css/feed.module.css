@@ -1,0 +1,100 @@
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.petZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 80px;
+  position: relative;
+  z-index: 5;
+}
+
+.slotsContainer {
+  display: flex;
+  gap: 15px;
+}
+
+.boneSlot {
+  width: 60px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.shadowBone {
+  width: 100%;
+  opacity: 0.1;
+  filter: grayscale(1) brightness(0.5);
+}
+
+.activeBone {
+  width: 100%;
+  opacity: 1 !important;
+  filter: 
+    drop-shadow(0 0 2px #fff) 
+    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5))
+    saturate(1.2);
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dogCharacter {
+  width: 450px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 5;
+  user-select: none;
+}
+
+.dogCharacter img {
+  width: 100%;
+  height: auto;
+}
+
+.bonesField {
+  width: 100%;
+  max-width: 600px;
+  height: 180px;
+  position: relative;
+}
+
+.draggableBone {
+  width: 80px;
+  cursor: grab;
+  z-index: 1000;
+  position: absolute;
+  touch-action: none;
+}
+
+.draggableBone img {
+  width: 100%;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.draggableBone:active {
+  cursor: grabbing;
+}
+
+@keyframes popIn {
+  0% { 
+    transform: scale(0.5); 
+    filter: brightness(2) white-balance(1);
+  }
+  100% { 
+    transform: scale(1); 
+    filter: brightness(1);
+  }
+}

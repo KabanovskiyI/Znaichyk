@@ -1,0 +1,94 @@
+/* Контейнер тепер просто центрує гру всередині батьківського блоку */
+.gameContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+}
+
+.gridContainerOdd {
+  display: grid;
+  /* Використовуємо min-content, щоб колонки підлаштовувалися під розмір карток (300px) */
+  grid-template-columns: repeat(2, min-content); 
+  /* Або жорстко: grid-template-columns: 300px 300px; */
+  
+  gap: 40px;
+  padding: 20px;
+  justify-content: center; /* Центрування колонок всередині сітки */
+  margin: 0 auto;
+}
+
+.gameCard {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  transition: transform 0.1s ease;
+  
+  /* Важливо: прибираємо можливі зовнішні відступи, що можуть зламати сітку */
+  display: block; 
+}
+
+.gameCard:active {
+  transform: scale(0.95);
+}
+
+/* ФОН КАРТКИ (Cards_X) */
+.cardBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  z-index: 1;
+}
+
+/* ПРЕДМЕТ (Ally/Enemy) */
+.cardItem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%; 
+  height: 70%;
+  z-index: 2;
+  object-fit: contain;
+  pointer-events: none;
+}
+
+/* Класс для правильной карточки */
+.correctCard {
+  transform: scale(1.05); /* Немного увеличиваем */
+  filter: drop-shadow(0 0 20px rgba(76, 217, 100, 0.8)); /* Зеленое свечение */
+  z-index: 10;
+  pointer-events: none; /* Чтобы нельзя было кликнуть еще раз */
+  transition: all 0.3s ease;
+}
+
+/* Опционально: можно добавить анимацию покачивания */
+@keyframes successPulse {
+  0% { transform: scale(1.05); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1.05); }
+}
+
+.correctCard {
+  animation: successPulse 0.5s infinite ease-in-out;
+}
+/* Адаптивність для мобільних пристроїв */
+@media (max-width: 700px) {
+  .gridContainer {
+    gap: 20px; /* Зменшуємо відступ на малих екранах */
+    grid-template-columns: repeat(2, 1fr); /* На мобільних ділимо навпіл */
+  }
+  
+  .gameCard {
+    width: 40vw; 
+    height: 40vw;
+  }
+}

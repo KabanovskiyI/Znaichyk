@@ -1,0 +1,127 @@
+.container {
+  position: fixed; /* Оставляем fixed, чтобы он не зависел от скролла */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 0; /* Ставим 0 вместо -1 */
+  background-color: #87CEEB;
+}
+
+.skyLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.cloudsContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.cloudsDistant {
+  z-index: 0;
+  opacity: 0.5;
+  transform: scale(0.6);
+}
+
+.cloudsFar {
+  z-index: 1;
+  opacity: 0.8;
+  transform: scale(0.7);
+}
+
+.cloudsNear {
+  z-index: 3;
+}
+
+.cloud {
+  position: absolute;
+  width: 150px;
+  height: auto;
+  transition: all 0.5s ease-in-out;
+}
+
+.posLeft { top: 20%; left: 15%; }
+.posCenter { top: 10%; left: 50%; transform: translateX(-50%); }
+.posRight { top: 25%; right: 15%; }
+
+.exiting .cloudsLeftGroup .cloud {
+  transform: translateX(-150vw) !important;
+  opacity: 0;
+  transition: transform 0.6s ease-in, opacity 0.6s;
+}
+
+.exiting .cloudsRightGroup .cloud {
+  transform: translateX(150vw) !important;
+  opacity: 0;
+  transition: transform 0.6s ease-in, opacity 0.6s;
+}
+
+.entering .cloud {
+  opacity: 0;
+  top: 100% !important;
+  left: 50% !important;
+  transform: translate(-50%, 100px) scale(0) !important;
+  transition: none;
+}
+
+.groundBase {
+  position: absolute;
+  width: 80vh; 
+  height: 80vh;
+  aspect-ratio: 1/1; 
+  border-radius: 50%;
+  overflow: visible !important; 
+  transition: transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+.groundLgLeft {
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  width: 110vh;
+  height: 110vh;
+  transform-origin: center center;
+  transform: translate(-25%, 55%) scaleX(-1) rotate(calc(0deg - var(--rot, 0deg)));
+}
+
+.groundLgRight {
+  z-index: 2;
+  bottom: 0;
+  right: 0;
+  width: 110vh;
+  height: 110vh;
+  transform-origin: center center;
+  transform: translate(25%, 55%) rotate(calc(5deg + var(--rot, 0deg)));
+}
+
+.groundHgLeft {
+  z-index: 4;
+  bottom: 0;
+  left: 0;
+  width: 125vh;
+  height: 125vh;
+  transform-origin: center center;
+  transform: translate(-55%, 60%) scaleX(-1) rotate(calc(15deg - var(--rot, 0deg)));
+}
+
+.groundHgRight {
+  z-index: 4;
+  bottom: 0;
+  right: 0;
+  width: 125vh;
+  height: 125vh;
+  transform-origin: center center;
+  transform: translate(55%, 60%) rotate(calc(15deg + var(--rot, 0deg)));
+}

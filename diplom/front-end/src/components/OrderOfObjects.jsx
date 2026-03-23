@@ -1,0 +1,196 @@
+import React, { useState, useEffect, useRef } from 'react';
+import styles from '../../public/assets/css/OrderOfObjects.module.css';
+import ConfettiPopper from './ConfettiPopper'; // Импорт конфетти
+import { playSound } from '../utils/audioHelper.js'; // Утилита звука
+
+import winSound from '../../public/assets/sounds/confetti-pop.mp3';
+import startSound from '../../public/assets/sounds/OrderOfObjects/task_OrderOfObjects.mp3'; // Проверь путь к этому файлу
+
+// Импорты ассетов (Картинки)
+import lion from '../../public/assets/images/OrderOfObjects/lion.svg';
+import bear from '../../public/assets/images/OrderOfObjects/Bear.svg';
+import chicken from '../../public/assets/images/OrderOfObjects/chiken.svg';
+import elephant from '../../public/assets/images/OrderOfObjects/elefant.svg';
+import fox from '../../public/assets/images/OrderOfObjects/Fox.svg';
+import koala from '../../public/assets/images/OrderOfObjects/koala.svg';
+import lamb from '../../public/assets/images/OrderOfObjects/lamb.svg';
+import owl from '../../public/assets/images/OrderOfObjects/Owl.svg';
+import pig from '../../public/assets/images/OrderOfObjects/pig.svg';
+
+import btnBlue from '../../public/assets/images/OrderOfObjects/Button_blue.svg';
+import btnGreen from '../../public/assets/images/OrderOfObjects/Button_green.svg';
+import btnPink from '../../public/assets/images/OrderOfObjects/Button_pink.svg';
+import btnRed from '../../public/assets/images/OrderOfObjects/Button_red.svg';
+
+const ANIMAL_ASSETS = [lion, bear, chicken, elephant, fox, koala, lamb, owl, pig];
+const CARD_BGS = [btnBlue, btnGreen, btnPink, btnRed];
+const SLOT_WIDTH = 300; 
+
+const MemoryShuffle = ({ onSuccess }) => {
+    const [items, setItems] = useState([]);
+    const [step, setStep] = useState('memorize');
+    const [draggingId, setDraggingId] = useState(null);
+    const [dragOffset, setDragOffset] = useState(0);
+    const [showConfetti, setShowConfetti] = useState(false); // Состояние для конфетти
+    
+    const itemsRef = useRef([]); 
+    const startXRef = useRef(0);
+    const draggingIdRef = useRef(null); 
+
+    const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
+
+    const initGame = () => {
+        // 1. Запуск звука при старте
+        playSound(startSound);
+
+        const selectedAnimals = shuffleArray(ANIMAL_ASSETS).slice(0, 4);
+        const bgs = shuffleArray(CARD_BGS);
+        const initialItems = selectedAnimals.map((src, index) => ({
+            id: `animal-${index}`,
+            src: src,
+            background: bgs[index],
+            originalPos: index, 
+            pos: index,         
+            isLocked: false     
+        }));
+        setItems(initialItems);
+        itemsRef.current = initialItems;
+        setTimeout(() => startShuffle(), 3000);
+    };
+
+    const startShuffle = () => {
+        setStep('shuffle');
+        const newPositions = shuffleArray([0, 1, 2, 3]);
+        const shuffled = itemsRef.current.map((item, idx) => ({
+            ...item,
+            pos: newPositions[idx],
+            isLocked: false
+        }));
+        setItems(shuffled);
+        itemsRef.current = shuffled;
+        setTimeout(() => setStep('play'), 1500);
+    };
+
+    const handleStart = (e, item) => {
+        if (step !== 'play' || item.isLocked) return;
+        const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+        setDraggingId(item.id);
+        draggingIdRef.current = item.id;
+        startXRef.current = clientX;
+    };
+
+    useEffect(() => {
+        const handleMove = (e) => {
+            if (!draggingIdRef.current) return;
+
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const diff = clientX - startXRef.current;
+            setDragOffset(diff);
+
+            const currentItems = itemsRef.current;
+            const draggedItem = currentItems.find(i => i.id === draggingIdRef.current);
+            if (!draggedItem) return;
+
+            const targetPos = Math.max(0, Math.min(3, Math.round((draggedItem.pos * SLOT_WIDTH + diff) / SLOT_WIDTH)));
+
+            if (targetPos !== draggedItem.pos) {
+                const targetItem = currentItems.find(i => i.pos === targetPos);
+                
+                if (targetItem && !targetItem.isLocked) {
+                    const nextItems = currentItems.map(item => {
+                        if (item.id === draggingIdRef.current) return { ...item, pos: targetPos };
+                        if (item.id === targetItem.id) return { ...item, pos: draggedItem.pos };
+                        return item;
+                    });
+                    
+                    startXRef.current += (targetPos - draggedItem.pos) * SLOT_WIDTH;
+                    setDragOffset(clientX - startXRef.current);
+                    
+                    setItems(nextItems);
+                    itemsRef.current = nextItems;
+                }
+            }
+        };
+
+        const handleEnd = () => {
+            if (!draggingIdRef.current) return;
+
+            const finalItems = itemsRef.current.map(item => {
+                if (item.pos === item.originalPos) {
+                    return { ...item, isLocked: true };
+                }
+                return item;
+            });
+
+            setItems(finalItems);
+            itemsRef.current = finalItems;
+            setDraggingId(null);
+            draggingIdRef.current = null;
+            setDragOffset(0);
+
+            // ПРОВЕРКА ПОБЕДЫ
+            if (finalItems.every(i => i.isLocked)) {
+                // 2. Звук победы и конфетти
+                playSound(winSound);
+                setShowConfetti(true);
+                
+                setTimeout(() => {
+                    setStep('win');
+                    if (onSuccess) onSuccess(true); // Вызов коллбека, если передан
+                }, 500);
+            }
+        };
+
+        window.addEventListener('mousemove', handleMove);
+        window.addEventListener('mouseup', handleEnd);
+        window.addEventListener('touchmove', handleMove, { passive: false });
+        window.addEventListener('touchend', handleEnd);
+
+        return () => {
+            window.removeEventListener('mousemove', handleMove);
+            window.removeEventListener('mouseup', handleEnd);
+            window.removeEventListener('touchmove', handleMove);
+            window.removeEventListener('touchend', handleEnd);
+        };
+    }, []); 
+
+    useEffect(() => {
+        initGame();
+    }, []);
+
+    return (
+        <div className={styles.gameContainer}>
+            <div className={styles.gridContainer}>
+                {items.map((item) => {
+                    const isDragging = draggingId === item.id;
+                    return (
+                        <div
+                            key={item.id}
+                            onMouseDown={(e) => handleStart(e, item)}
+                            onTouchStart={(e) => handleStart(e, item)}
+                            className={`
+                                ${styles.gameCard} 
+                                ${item.isLocked ? styles.locked : ''} 
+                                ${isDragging ? styles.dragging : ''}
+                                ${step === 'shuffle' ? styles.shuffling : ''}
+                            `}
+                            style={{ 
+                                '--offset': item.pos,
+                                '--dragX': isDragging ? `${dragOffset}px` : '0px'
+                            }}
+                        >
+                            <img src={item.background} alt="bg" className={styles.cardBg} />
+                            <img src={item.src} alt="animal" className={styles.cardItem} />
+                            {item.isLocked && step === 'play' && <div className={styles.lockBadge}>✨</div>}
+                        </div>
+                    );
+                })}
+            </div>
+
+            {/* 3. Компонент Конфетти */}
+            <ConfettiPopper isTriggered={showConfetti} />
+        </div>
+    );
+};
+
+export default MemoryShuffle;
