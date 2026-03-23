@@ -1,0 +1,92 @@
+.puzzleWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  user-select: none;
+  padding: 20px;
+}
+
+.board {
+  display: grid;
+  border: 3px solid #e0eded;
+  border-radius: 12px;
+  position: relative; 
+  background-color: #f0f7f7;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Псевдоелемент для напівпрозорої підказки */
+.board::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  
+  background-image: var(--hint-url);
+  background-size: var(--hint-size-w) var(--hint-size-h);
+  background-position: var(--hint-pos-x) var(--hint-pos-y);
+  background-repeat: no-repeat;
+  
+  /* Висока прозорість для підказки */
+  opacity: 0.12; 
+  filter: grayscale(20%); /* Трохи приглушуємо кольори */
+  
+  /* КРИТИЧНО: щоб підказка не блокувала drag-and-drop */
+  pointer-events: none; 
+  z-index: 0; 
+}
+
+.slot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  outline: 1px solid rgba(0, 0, 0, 0.04);
+  background: transparent;
+  position: relative;
+  z-index: 1; 
+}
+
+.tray {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
+.draggableWrapper {
+  position: absolute;
+  cursor: grab;
+  touch-action: none;
+}
+
+.draggableWrapper:active {
+  cursor: grabbing;
+}
+
+.piece {
+  background-repeat: no-repeat;
+  flex-shrink: 0;
+}
+
+/* Картка в нижній панелі (з білою рамкою) */
+.card {
+  border: 4px solid white;
+  box-sizing: content-box; 
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 8px;
+}
+
+/* Частинка, яка вже "стала" на своє місце */
+.fixed {
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  z-index: 2;
+  /* Прибираємо будь-які зміщення, щоб збігалося з сіткою */
+}

@@ -10,17 +10,19 @@ import OddOneOut from '../components/OddOneOut.jsx';
 import OrderOfObjects from '../components/OrderOfObjects.jsx';
 import Syllables from '../components/syllables.jsx';
 import Baloons from '../components/Balloons.jsx';
+import Puzzle from '../components/puzzle.jsx';
 const MAX_PROGRESS = 5;
 
 const Games = () => {
   // Список игр
   const gamePool = useMemo(() => [
     //{ id: 'feed', Component: Feed },
-    { id: 'balloons', Component: Baloons },
+    //{ id: 'balloons', Component: Baloons },
     //{ id: 'abc', Component: ABC },
     //{ id: 'odd-one-out', Component: OddOneOut },
     //{ id: 'order-of-objects', Component: OrderOfObjects },
-    { id: 'syllables', Component: Syllables },
+    //{ id: 'syllables', Component: Syllables },
+    { id: 'puzzle', Component: Puzzle },
   ], []);
 
   // Состояние прогресса и фона
@@ -35,11 +37,12 @@ const Games = () => {
   // Храним счетчики блокировки для каждой игры: { id: остаток_ходов }
   const [cooldowns, setCooldowns] = useState({
     //'feed': 0,
-    'balloons': 0,
+    //'balloons': 0,
     //'abc': 0,
     //'odd-one-out': 0,
     //'order-of-objects': 0,
-    'syllables': 0
+    //'syllables': 0
+    'puzzle': 0
   });
 
   // Вспомогательная функция для выбора игры с учетом блокировок
@@ -155,7 +158,6 @@ const Games = () => {
           CurrentGame && (
             <div className={`game-wrapper ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
               <CurrentGame.Component
-                // Ключ по ID гарантирует, что React создаст чистый компонент
                 key={CurrentGame.id}
                 onSuccess={handleGameFinish}
               />
