@@ -1,17 +1,17 @@
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ConfettiPopper from './ConfettiPopper';
-import { playSound } from '../utils/audioHelper.js'; 
-import styles from '../../public/assets/css/balloons.module.css';
+import ConfettiPopper from '../../ConfettiPopper';
+import { playSound } from '../../../utils/audioHelper.js'; 
+import styles from '../../../../public/assets/css/balloons.module.css';
 
 const BALLOON_ASSETS = [
-  '/assets/images/Balloons/lime.svg',
-  '/assets/images/Balloons/purple.svg',
-  '/assets/images/Balloons/turquoise.svg',
-  '/assets/images/Balloons/yellow.svg',
+  '/assets/games/level_2/balloons/images/lime.svg',
+  '/assets/games/level_2/balloons/images/purple.svg',
+  '/assets/games/level_2/balloons/images/turquoise.svg',
+  '/assets/games/level_2/balloons/images/yellow.svg',
 ];
 
-const START_SOUND = '/assets/sounds/Balloons/start.mp3';
+const START_SOUND = '/assets/games/level_2/balloons/sounds/start.mp3';
 const WIN_SOUND = '/assets/sounds/confetti-pop.mp3';
 
 const BalloonsGame = ({ onSuccess }) => {
@@ -62,7 +62,7 @@ const BalloonsGame = ({ onSuccess }) => {
     const playTask = async () => {
       hasStartedAudio.current = true;
       await playSound(START_SOUND);
-      await playSound(`/assets/sounds/Balloons/${gameData.target.value}.mp3`);
+      await playSound(`/assets/games/level_2/balloons/sounds/${gameData.target.value}.mp3`);
     };
     playTask();
   }, [gameData.target.value]);
@@ -77,7 +77,7 @@ const BalloonsGame = ({ onSuccess }) => {
       if (onSuccess) setTimeout(() => onSuccess(true), 2500);
     } else {
       setWrongId(balloon.id);
-      playSound(`/assets/sounds/Balloons/${balloon.value}.mp3`);
+      playSound(`/assets/games/level_2/balloons/sounds/${balloon.value}.mp3`);
       setTimeout(() => setWrongId(null), 500);
     }
   };

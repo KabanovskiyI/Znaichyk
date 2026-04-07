@@ -27,7 +27,7 @@ const rawSyllables = [
 
 export const syllablesData = rawSyllables.map(syl => ({
   syllable: syl,
-  sound: `/assets/sounds/syllables/${transliterate(syl)}.mp3`
+  sound: `/assets/games/level_2/syllables/sounds/${transliterate(syl)}.mp3`
 }));
 
 export const getRandomSyllables = (count = 3) => {

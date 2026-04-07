@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import styles from '../../public/assets/css/syllables.module.css';
-import SoundIcon from '../utils/SoundIcon';
-import { buttonsData } from '../utils/buttonsData.js';
+import styles from '../../../../public/assets/css/syllables.module.css';
+import SoundIcon from '../../../utils/SoundIcon';
+import { buttonsData } from '../../../utils/buttonsData.js';
 // Імпортуємо нові дані складів
-import { getRandomSyllables } from '../utils/syllablesData.js'; 
-import { playSound } from '../utils/audioHelper.js';
-import ConfettiPopper from './ConfettiPopper';
+import { getRandomSyllables } from '../../../utils/syllablesData.js'; 
+import { playSound } from '../../../utils/audioHelper.js';
+import ConfettiPopper from '../../ConfettiPopper';
 
-import taskSound from '../../public/assets/sounds/syllables/syllables_start.mp3';
-import win from '../../public/assets/sounds/confetti-pop.mp3';
+import taskSound from '../../../../public/assets/games/level_2/syllables/sounds/syllables_start.mp3';
+import win from '../../../../public/assets/sounds/confetti-pop.mp3';
 
 const Syllables = ({ onSuccess }) => {
   const [showConfetti, setShowConfetti] = useState(false);

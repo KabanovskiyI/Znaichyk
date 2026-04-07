@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import styles from '../../public/assets/css/simon.module.css';
-import { playSound } from '../utils/audioHelper.js';
-import ConfettiPopper from './ConfettiPopper';
+import styles from '../../../../public/assets/css/simon.module.css';
+import { playSound } from '../../../utils/audioHelper.js';
+import ConfettiPopper from '../../ConfettiPopper';
 
-import winSound from '../../public/assets/sounds/confetti-pop.mp3';
-import startSound from '../../public/assets/sounds/simon/start_sound.mp3';
-import beepSound from '../../public/assets/sounds/simon/beep.mp3'; 
+import winSound from '../../../../public/assets/sounds/confetti-pop.mp3';
+import startSound from '../../../../public/assets/games/level_2/simon/sounds/start_sound.mp3';
+import beepSound from '../../../../public/assets/games/level_2/simon/sounds/beep.mp3'; 
 
 const SEQUENCE_LENGTH = Math.floor(Math.random() * 3) + 3; // Випадково від 3 до 5
 const COLORS = ['green', 'red', 'yellow', 'blue'];

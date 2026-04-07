@@ -1,25 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styles from '../../public/assets/css/OrderOfObjects.module.css';
-import ConfettiPopper from './ConfettiPopper';
-import { playSound } from '../utils/audioHelper.js';
+import styles from '../../../../public/assets/css/OrderOfObjects.module.css';
+import ConfettiPopper from '../../ConfettiPopper';
+import { playSound } from '../../../utils/audioHelper.js';
 
-import winSound from '../../public/assets/sounds/confetti-pop.mp3';
-import startSound from '../../public/assets/sounds/OrderOfObjects/task_OrderOfObjects.mp3';
+import winSound from '../../../../public/assets/sounds/confetti-pop.mp3';
+import startSound from '../../../../public/assets/games/level_1/orderofobjects/sounds/task_OrderOfObjects.mp3';
 
-import lion from '../../public/assets/images/OrderOfObjects/lion.svg';
-import bear from '../../public/assets/images/OrderOfObjects/Bear.svg';
-import chicken from '../../public/assets/images/OrderOfObjects/chiken.svg';
-import elephant from '../../public/assets/images/OrderOfObjects/elefant.svg';
-import fox from '../../public/assets/images/OrderOfObjects/Fox.svg';
-import koala from '../../public/assets/images/OrderOfObjects/koala.svg';
-import lamb from '../../public/assets/images/OrderOfObjects/lamb.svg';
-import owl from '../../public/assets/images/OrderOfObjects/Owl.svg';
-import pig from '../../public/assets/images/OrderOfObjects/pig.svg';
+import lion from '../../../../public/assets/games/level_1/orderofobjects/images/lion.svg';
+import bear from '../../../../public/assets/games/level_1/orderofobjects/images/Bear.svg';
+import chicken from '../../../../public/assets/games/level_1/orderofobjects/images/chiken.svg';
+import elephant from '../../../../public/assets/games/level_1/orderofobjects/images/elefant.svg';
+import fox from '../../../../public/assets/games/level_1/orderofobjects/images/Fox.svg';
+import koala from '../../../../public/assets/games/level_1/orderofobjects/images/koala.svg';
+import lamb from '../../../../public/assets/games/level_1/orderofobjects/images/lamb.svg';
+import owl from '../../../../public/assets/games/level_1/orderofobjects/images/Owl.svg';
+import pig from '../../../../public/assets/games/level_1/orderofobjects/images/pig.svg';
 
-import btnBlue from '../../public/assets/images/OrderOfObjects/Button_blue.svg';
-import btnGreen from '../../public/assets/images/OrderOfObjects/Button_green.svg';
-import btnPink from '../../public/assets/images/OrderOfObjects/Button_pink.svg';
-import btnRed from '../../public/assets/images/OrderOfObjects/Button_red.svg';
+import btnBlue from '../../../../public/assets/games/level_1/orderofobjects/images/Button_blue.svg';
+import btnGreen from '../../../../public/assets/games/level_1/orderofobjects/images/Button_green.svg';
+import btnPink from '../../../../public/assets/games/level_1/orderofobjects/images/Button_pink.svg';
+import btnRed from '../../../../public/assets/games/level_1/orderofobjects/images/Button_red.svg';
 
 const ANIMAL_ASSETS = [lion, bear, chicken, elephant, fox, koala, lamb, owl, pig];
 const CARD_BGS = [btnBlue, btnGreen, btnPink, btnRed];

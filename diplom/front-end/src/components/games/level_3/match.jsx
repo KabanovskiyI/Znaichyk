@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import styles from '../../public/assets/css/match.module.css';
-import { playSound } from '../utils/audioHelper.js';
-import ConfettiPopper from './ConfettiPopper';
+import styles from '../../../../public/assets/css/match.module.css';
+import { playSound } from '../../../utils/audioHelper.js';
+import ConfettiPopper from '../../ConfettiPopper';
 
 // Звуки
-import winSound from '../../public/assets/sounds/confetti-pop.mp3';
-import startSound from '../../public/assets/sounds/match/start_match.mp3';
-import flipSound from '../../public/assets/sounds/match/card_sound.mp3';
+import winSound from '../../../../public/assets/sounds/confetti-pop.mp3';
+import startSound from '../../../../public/assets/games/level_3/match/sounds/start_match.mp3';
+import flipSound from '../../../../public/assets/games/level_3/match/sounds/card_sound.mp3';
 
 // Ассети
-import lion from '../../public/assets/images/OrderOfObjects/lion.svg';
-import bear from '../../public/assets/images/OrderOfObjects/Bear.svg';
-import chicken from '../../public/assets/images/OrderOfObjects/chiken.svg';
-import elephant from '../../public/assets/images/OrderOfObjects/elefant.svg';
-import fox from '../../public/assets/images/OrderOfObjects/Fox.svg';
-import pig from '../../public/assets/images/OrderOfObjects/pig.svg';
+import lion from '../../../../public/assets/games/level_1/orderofobjects/images/lion.svg';
+import bear from '../../../../public/assets/games/level_1/orderofobjects/images/Bear.svg';
+import chicken from '../../../../public/assets/games/level_1/orderofobjects/images/chiken.svg';
+import elephant from '../../../../public/assets/games/level_1/orderofobjects/images/elefant.svg';
+import fox from '../../../../public/assets/games/level_1/orderofobjects/images/Fox.svg';
+import pig from '../../../../public/assets/games/level_1/orderofobjects/images/pig.svg';
 
 const ALL_ANIMALS = [lion, bear, chicken, elephant, fox, pig];
 

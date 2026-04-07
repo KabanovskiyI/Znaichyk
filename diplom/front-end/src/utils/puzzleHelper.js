@@ -1,4 +1,4 @@
-const imageModules = import.meta.glob('../../public/assets/images/puzzle/*.{png,jpg,jpeg,svg,webp}', { eager: true });
+const imageModules = import.meta.glob('../../public/assets/games/level_2/puzzle/images/*.{png,jpg,jpeg,svg,webp}', { eager: true });
 
 const imagePaths = Object.values(imageModules).map((mod) => mod.default || mod);
 

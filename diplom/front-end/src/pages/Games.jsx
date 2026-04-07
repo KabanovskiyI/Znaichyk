@@ -4,15 +4,15 @@ import Play from '../../public/assets/images/play.svg';
 import Header from '../components/header.jsx';
 import GameBackground from '../components/background.jsx';
 
-import Feed from '../components/feed.jsx';
-import ABC from '../components/abc.jsx';
-import OddOneOut from '../components/OddOneOut.jsx';
-import OrderOfObjects from '../components/OrderOfObjects.jsx';
-import Syllables from '../components/syllables.jsx';
-import Baloons from '../components/Balloons.jsx';
-import Puzzle from '../components/puzzle.jsx';
-import Simon from '../components/simon.jsx';
-import Match from '../components/match.jsx';
+import Feed from '../components/games/level_1/feed.jsx';
+import ABC from '../components/games/level_1/abc.jsx';
+import OddOneOut from '../components/games/level_1/OddOneOut.jsx';
+import OrderOfObjects from '../components/games/level_1/OrderOfObjects.jsx';
+import Syllables from '../components/games/level_2/syllables.jsx';
+import Baloons from '../components/games/level_2/Balloons.jsx';
+import Puzzle from '../components/games/level_2/puzzle.jsx';
+import Simon from '../components/games/level_2/simon.jsx';
+import Match from '../components/games/level_3/match.jsx';
 const MAX_PROGRESS = 5;
 
 const Games = () => {

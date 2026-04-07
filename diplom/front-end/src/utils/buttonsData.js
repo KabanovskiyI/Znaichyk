@@ -1,38 +1,28 @@
-import blueDefault from '../../public/assets/images/buttons/Blue_button.svg';
-import bluePress from '../../public/assets/images/buttons/Blue_button_press.svg';
-
-import greenDefault from '../../public/assets/images/buttons/Green_button.svg';
-import greenPress from '../../public/assets/images/buttons/Green_button_press.svg';
-
-import pinkDefault from '../../public/assets/images/buttons/Pink_button.svg';
-import pinkPress from '../../public/assets/images/buttons/Pink_button_press.svg';
-
-import redDefault from '../../public/assets/images/buttons/Red_button.svg';
-import redPress from '../../public/assets/images/buttons/Red_button_press.svg';
+const BUTTONS_BASE_PATH = '/assets/games/level_1/abc/images/buttons';
 
 export const buttonsData = [
   {
     id: 1,
-    defaultSrc: blueDefault,
-    activeSrc: bluePress,
+    defaultSrc: `${BUTTONS_BASE_PATH}/Blue_button.svg`,
+    activeSrc: `${BUTTONS_BASE_PATH}/Blue_button_press.svg`,
     alt: 'Blue Button'
   },
   {
     id: 2,
-    defaultSrc: greenDefault,
-    activeSrc: greenPress,
+    defaultSrc: `${BUTTONS_BASE_PATH}/Green_button.svg`,
+    activeSrc: `${BUTTONS_BASE_PATH}/Green_button_press.svg`,
     alt: 'Green Button'
   },
   {
     id: 3,
-    defaultSrc: pinkDefault,
-    activeSrc: pinkPress,
+    defaultSrc: `${BUTTONS_BASE_PATH}/Pink_button.svg`,
+    activeSrc: `${BUTTONS_BASE_PATH}/Pink_button_press.svg`,
     alt: 'Pink Button'
   },
   {
     id: 4,
-    defaultSrc: redDefault,
-    activeSrc: redPress,
+    defaultSrc: `${BUTTONS_BASE_PATH}/Red_button.svg`,
+    activeSrc: `${BUTTONS_BASE_PATH}/Red_button_press.svg`,
     alt: 'Red Button'
   }
 ];
