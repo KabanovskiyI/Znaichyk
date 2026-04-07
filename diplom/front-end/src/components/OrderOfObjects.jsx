@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styles from '../../public/assets/css/OrderOfObjects.module.css';
-import ConfettiPopper from './ConfettiPopper'; // Импорт конфетти
-import { playSound } from '../utils/audioHelper.js'; // Утилита звука
+import ConfettiPopper from './ConfettiPopper';
+import { playSound } from '../utils/audioHelper.js';
 
 import winSound from '../../public/assets/sounds/confetti-pop.mp3';
-import startSound from '../../public/assets/sounds/OrderOfObjects/task_OrderOfObjects.mp3'; // Проверь путь к этому файлу
+import startSound from '../../public/assets/sounds/OrderOfObjects/task_OrderOfObjects.mp3';
 
-// Импорты ассетов (Картинки)
 import lion from '../../public/assets/images/OrderOfObjects/lion.svg';
 import bear from '../../public/assets/images/OrderOfObjects/Bear.svg';
 import chicken from '../../public/assets/images/OrderOfObjects/chiken.svg';
@@ -31,16 +30,23 @@ const MemoryShuffle = ({ onSuccess }) => {
     const [step, setStep] = useState('memorize');
     const [draggingId, setDraggingId] = useState(null);
     const [dragOffset, setDragOffset] = useState(0);
-    const [showConfetti, setShowConfetti] = useState(false); // Состояние для конфетти
+    const [showConfetti, setShowConfetti] = useState(false);
     
     const itemsRef = useRef([]); 
     const startXRef = useRef(0);
     const draggingIdRef = useRef(null); 
 
-    const shuffleArray = (array) => [...array].sort(() => Math.random() - 0.5);
+    // Покращений алгоритм перемішування (Fisher-Yates)
+    const shuffleArray = (array) => {
+        const newArr = [...array];
+        for (let i = newArr.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+        }
+        return newArr;
+    };
 
     const initGame = () => {
-        // 1. Запуск звука при старте
         playSound(startSound);
 
         const selectedAnimals = shuffleArray(ANIMAL_ASSETS).slice(0, 4);
@@ -50,8 +56,8 @@ const MemoryShuffle = ({ onSuccess }) => {
             src: src,
             background: bgs[index],
             originalPos: index, 
-            pos: index,         
-            isLocked: false     
+            pos: index,          
+            isLocked: false      
         }));
         setItems(initialItems);
         itemsRef.current = initialItems;
@@ -60,12 +66,24 @@ const MemoryShuffle = ({ onSuccess }) => {
 
     const startShuffle = () => {
         setStep('shuffle');
-        const newPositions = shuffleArray([0, 1, 2, 3]);
+        
+        let newPositions;
+        let isDifferent = false;
+
+        // Гілка логіки: крутимо рандом, поки він не видасть хоча б одну зміну позиції
+        // Для 4-х елементів це спрацює миттєво
+        while (!isDifferent) {
+            newPositions = shuffleArray([0, 1, 2, 3]);
+            // Перевіряємо, чи масив не ідентичний [0, 1, 2, 3]
+            isDifferent = newPositions.some((pos, idx) => pos !== idx);
+        }
+
         const shuffled = itemsRef.current.map((item, idx) => ({
             ...item,
             pos: newPositions[idx],
             isLocked: false
         }));
+
         setItems(shuffled);
         itemsRef.current = shuffled;
         setTimeout(() => setStep('play'), 1500);
@@ -128,15 +146,13 @@ const MemoryShuffle = ({ onSuccess }) => {
             draggingIdRef.current = null;
             setDragOffset(0);
 
-            // ПРОВЕРКА ПОБЕДЫ
             if (finalItems.every(i => i.isLocked)) {
-                // 2. Звук победы и конфетти
                 playSound(winSound);
                 setShowConfetti(true);
                 
                 setTimeout(() => {
                     setStep('win');
-                    if (onSuccess) onSuccess(true); // Вызов коллбека, если передан
+                    if (onSuccess) onSuccess(true);
                 }, 500);
             }
         };
@@ -186,8 +202,6 @@ const MemoryShuffle = ({ onSuccess }) => {
                     );
                 })}
             </div>
-
-            {/* 3. Компонент Конфетти */}
             <ConfettiPopper isTriggered={showConfetti} />
         </div>
     );

@@ -1,0 +1,123 @@
+.gameWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  min-height: 600px;
+}
+
+.cardGrid {
+  display: grid;
+  /* Збільшено у 1.5 рази: 160 * 1.5 = 240px */
+  grid-template-columns: repeat(3, 240px);
+  grid-template-rows: repeat(2, 240px);
+  gap: 25px;
+}
+
+.cardContainer {
+  width: 240px;
+  height: 240px;
+  cursor: pointer;
+  perspective: 1000px;
+  position: relative; /* Важливо для z-index */
+}
+
+.cardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cardFront, .cardBack {
+  position: absolute;
+  box-sizing: border-box; /* Щоб бордер не роздував картку */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 35px; /* Більш закруглені кути для м'якості */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+  border: 8px solid #ffffff;
+}
+
+/* Нова сучасна сорочка карти */
+.cardFront {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+}
+
+/* Додаємо стильний візерунок на фон сорочки */
+.cardFront::before {
+  content: "";
+  position: absolute;
+  width: 150%;
+  height: 150%;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.2) 20%, transparent 20%);
+  background-size: 30px 30px;
+  opacity: 0.3;
+  transform: rotate(15deg);
+}
+
+.pattern {
+  font-size: 80px;
+  filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.cardContainer:hover .pattern {
+  transform: scale(1.2) rotate(10deg);
+}
+
+/* Відкрита карта */
+.cardBack {
+  background-color: #ffffff;
+  transform: rotateY(180deg);
+  /* Додаємо легке внутрішнє свічення */
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.05), 0 12px 25px rgba(0,0,0,0.1);
+}
+
+.cardImage {
+  width: 75%;
+  height: 75%;
+  object-fit: contain;
+}
+.activeCard {
+  z-index: 10;
+}
+/* Ефект "натискання" */
+.cardContainer:active .cardInner {
+  transform: scale(0.95);
+}
+
+/* Адаптивність для планшетів */
+@media (max-width: 800px) {
+  .cardGrid {
+    grid-template-columns: repeat(3, 180px);
+    grid-template-rows: repeat(2, 180px);
+    gap: 15px;
+  }
+  .cardContainer {
+    width: 180px;
+    height: 180px;
+  }
+}
+
+/* Адаптивність для телефонів */
+@media (max-width: 600px) {
+  .cardGrid {
+    grid-template-columns: repeat(2, 140px);
+    grid-template-rows: repeat(3, 140px);
+    gap: 10px;
+  }
+  .cardContainer {
+    width: 140px;
+    height: 140px;
+  }
+}

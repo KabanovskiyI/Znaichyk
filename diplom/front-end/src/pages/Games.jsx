@@ -11,6 +11,8 @@ import OrderOfObjects from '../components/OrderOfObjects.jsx';
 import Syllables from '../components/syllables.jsx';
 import Baloons from '../components/Balloons.jsx';
 import Puzzle from '../components/puzzle.jsx';
+import Simon from '../components/simon.jsx';
+import Match from '../components/match.jsx';
 const MAX_PROGRESS = 5;
 
 const Games = () => {
@@ -22,7 +24,9 @@ const Games = () => {
     //{ id: 'odd-one-out', Component: OddOneOut },
     //{ id: 'order-of-objects', Component: OrderOfObjects },
     //{ id: 'syllables', Component: Syllables },
-    { id: 'puzzle', Component: Puzzle },
+    //{ id: 'puzzle', Component: Puzzle },
+    //{ id: 'simon', Component: Simon },
+    { id: 'match', Component: Match },
   ], []);
 
   // Состояние прогресса и фона
@@ -41,8 +45,10 @@ const Games = () => {
     //'abc': 0,
     //'odd-one-out': 0,
     //'order-of-objects': 0,
-    //'syllables': 0
-    'puzzle': 0
+    //'syllables': 0,
+    //'puzzle': 0,
+    //'simon': 0,
+    'match': 0,
   });
 
   // Вспомогательная функция для выбора игры с учетом блокировок

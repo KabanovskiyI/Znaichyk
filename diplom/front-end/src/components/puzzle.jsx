@@ -1,11 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styles from '../../public/assets/css/puzzle.module.css';
 import { playSound } from '../utils/audioHelper.js';
-import { getRandomPuzzleImage } from '../utils/puzzleHelper.js'; // Наша нова утиліта
+import { getRandomPuzzleImage } from '../utils/puzzleHelper.js';
 import ConfettiPopper from './ConfettiPopper';
 
 import winSound from '../../public/assets/sounds/confetti-pop.mp3';
+import startSound from '../../public/assets/sounds/puzzle/start_puzzle.mp3'; 
 
 const GRID_SIZE = 3; 
 const TILE_COUNT = GRID_SIZE * GRID_SIZE;
@@ -13,7 +14,7 @@ const DESKTOP_PIECE_SIZE = 150;
 const CARD_BORDER = 4;
 
 const ImagePuzzle = ({ onSuccess }) => {
-  const [imageUrl, setImageUrl] = useState(null); // Шлях до обраної картинки
+  const [imageUrl, setImageUrl] = useState(null);
   const [showConfetti, setShowConfetti] = useState(false);
   const [placedPieces, setPlacedPieces] = useState([]);
   const [shuffledIndices, setShuffledIndices] = useState([]);
@@ -23,6 +24,7 @@ const ImagePuzzle = ({ onSuccess }) => {
   useEffect(() => {
     const randomImg = getRandomPuzzleImage();
     setImageUrl(randomImg);
+    playSound(startSound);
   }, []);
 
   useEffect(() => {
@@ -63,7 +65,6 @@ const ImagePuzzle = ({ onSuccess }) => {
         offsetY: offY
       });
 
-      // Перемішуємо індекси тільки після завантаження картинки
       if (shuffledIndices.length === 0) {
         const indices = Array.from({ length: TILE_COUNT }, (_, i) => i);
         setShuffledIndices([...indices].sort(() => Math.random() - 0.5));
