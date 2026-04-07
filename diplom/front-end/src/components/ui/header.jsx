@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import styles from '../../public/assets/css/header.module.css';
+import styles from './header.module.css';
 
 const TurtleProgressBar = ({ currentStep = 0 }) => {
   const totalSteps = 5;

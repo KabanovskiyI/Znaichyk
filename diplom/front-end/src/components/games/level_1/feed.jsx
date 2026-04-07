@@ -1,27 +1,27 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ConfettiPopper from '../../ConfettiPopper';
-import styles from '../../../../public/assets/css/feed.module.css';
+import ConfettiPopper from '../../ui/ConfettiPopper';
+import styles from './feed.module.css';
 
 import { playSound } from '../../../utils/audioHelper.js'; 
 
-import dogImg from '../../../../public/assets/games/level_1/feed/images/dog.svg';
-import boneImg from '../../../../public/assets/games/level_1/feed/images/bone.svg';
-import boneShadowImg from '../../../../public/assets/games/level_1/feed/images/bone_shadow.svg';
+import dogImg from '/assets/games/level_1/feed/images/dog.svg';
+import boneImg from '/assets/games/level_1/feed/images/bone.svg';
+import boneShadowImg from '/assets/games/level_1/feed/images/bone_shadow.svg';
 
-import wow from '../../../../public/assets/games/level_1/feed/sounds/wow.mp3';
-import win from '../../../../public/assets/sounds/confetti-pop.mp3';
-import task1 from '../../../../public/assets/games/level_1/feed/sounds/task_1.mp3';
-import task2 from '../../../../public/assets/games/level_1/feed/sounds/task_2.mp3';
-import task3 from '../../../../public/assets/games/level_1/feed/sounds/task_3.mp3';
-import task4 from '../../../../public/assets/games/level_1/feed/sounds/task_4.mp3';
-import task5 from '../../../../public/assets/games/level_1/feed/sounds/task_5.mp3';
+import wow from '/assets/games/level_1/feed/sounds/wow.mp3';
+import win from '/assets/sounds/confetti-pop.mp3';
+import task1 from '/assets/games/level_1/feed/sounds/task_1.mp3';
+import task2 from '/assets/games/level_1/feed/sounds/task_2.mp3';
+import task3 from '/assets/games/level_1/feed/sounds/task_3.mp3';
+import task4 from '/assets/games/level_1/feed/sounds/task_4.mp3';
+import task5 from '/assets/games/level_1/feed/sounds/task_5.mp3';
 
-import n1 from '../../../../public/assets/games/level_1/feed/sounds/1.mp3';
-import n2 from '../../../../public/assets/games/level_1/feed/sounds/2.mp3';
-import n3 from '../../../../public/assets/games/level_1/feed/sounds/3.mp3';
-import n4 from '../../../../public/assets/games/level_1/feed/sounds/4.mp3';
-import n5 from '../../../../public/assets/games/level_1/feed/sounds/5.mp3';
+import n1 from '/assets/games/level_1/feed/sounds/1.mp3';
+import n2 from '/assets/games/level_1/feed/sounds/2.mp3';
+import n3 from '/assets/games/level_1/feed/sounds/3.mp3';
+import n4 from '/assets/games/level_1/feed/sounds/4.mp3';
+import n5 from '/assets/games/level_1/feed/sounds/5.mp3';
 
 const TASK_SOUNDS = { 1: task1, 2: task2, 3: task3, 4: task4, 5: task5 };
 const NUMBER_SOUNDS = { 1: n1, 2: n2, 3: n3, 4: n4, 5: n5 };

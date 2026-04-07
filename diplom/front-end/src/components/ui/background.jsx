@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import styles from '../../public/assets/css/background.module.css';
+import styles from './background.module.css';
 
-import skySrc from '../../public/assets/images/Background/Sky.svg';
-import lgSrc from '../../public/assets/images/Background/Lg1.svg';
-import hgSrc from '../../public/assets/images/Background/Hg1.svg';
-import cloud1 from '../../public/assets/images/Background/CloudFrontLayer1.svg';
-import cloud2 from '../../public/assets/images/Background/CloudFrontLayer2.svg';
-import cloud3 from '../../public/assets/images/Background/CloudFrontLayer3.svg';
-import cloudD1 from '../../public/assets/images/Background/CloudBackLayer1.svg';
-import cloudD2 from '../../public/assets/images/Background/CloudBackLayer2.svg';
-import cloudD3 from '../../public/assets/images/Background/CloudBackLayer3.svg';
+import skySrc from '/assets/images/Background/Sky.svg';
+import lgSrc from '/assets/images/Background/Lg1.svg';
+import hgSrc from '/assets/images/Background/Hg1.svg';
+import cloud1 from '/assets/images/Background/CloudFrontLayer1.svg';
+import cloud2 from '/assets/images/Background/CloudFrontLayer2.svg';
+import cloud3 from '/assets/images/Background/CloudFrontLayer3.svg';
+import cloudD1 from '/assets/images/Background/CloudBackLayer1.svg';
+import cloudD2 from '/assets/images/Background/CloudBackLayer2.svg';
+import cloudD3 from '/assets/images/Background/CloudBackLayer3.svg';
 
 const GameBackground = ({ step }) => {
   const [animState, setAnimState] = useState('idle');

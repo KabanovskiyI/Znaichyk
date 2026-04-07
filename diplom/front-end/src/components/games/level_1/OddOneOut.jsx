@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { gameSets, cardBackgrounds } from '../../../utils/OddOneOutData.js';
-import ConfettiPopper from '../../ConfettiPopper';
-import styles from '../../../../public/assets/css/OddOneOut.module.css';
-import win from '../../../../public/assets/sounds/confetti-pop.mp3';
-import start from '../../../../public/assets/games/level_1/oddoneout/sounds/task_1_logics.mp3';
+import ConfettiPopper from '../../ui/ConfettiPopper';
+import styles from './OddOneOut.module.css';
+import win from '/assets/sounds/confetti-pop.mp3';
+import start from '/assets/games/level_1/oddoneout/sounds/task_1_logics.mp3';
 import { playSound } from '../../../utils/audioHelper.js';
 
 const OddOneOut = ({ onSuccess }) => {

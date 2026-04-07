@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import styles from '../../../../public/assets/css/puzzle.module.css';
+import styles from './puzzle.module.css';
 import { playSound } from '../../../utils/audioHelper.js';
 import { getRandomPuzzleImage } from '../../../utils/puzzleHelper.js';
-import ConfettiPopper from '../../ConfettiPopper';
+import ConfettiPopper from '../../ui/ConfettiPopper';
 
-import winSound from '../../../../public/assets/sounds/confetti-pop.mp3';
-import startSound from '../../../../public/assets/games/level_2/puzzle/sounds/start_puzzle.mp3'; 
+import winSound from '/assets/sounds/confetti-pop.mp3';
+import startSound from '/assets/games/level_2/puzzle/sounds/start_puzzle.mp3'; 
 
 const GRID_SIZE = 3; 
 const TILE_COUNT = GRID_SIZE * GRID_SIZE;

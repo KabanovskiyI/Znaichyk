@@ -1,8 +1,8 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import '../../public/assets/css/Games.css';
-import Play from '../../public/assets/images/play.svg';
-import Header from '../components/header.jsx';
-import GameBackground from '../components/background.jsx';
+import './Games.css';
+import Play from '/assets/images/play.svg';
+import Header from '../components/ui/header.jsx';
+import GameBackground from '../components/ui/background.jsx';
 
 import Feed from '../components/games/level_1/feed.jsx';
 import ABC from '../components/games/level_1/abc.jsx';

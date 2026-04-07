@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import styles from '../../../../public/assets/css/abc.module.css';
+import styles from './abc.module.css';
 import SoundIcon from '../../../utils/SoundIcon';
 import { buttonsData } from '../../../utils/buttonsData.js';
 import { alphabetData } from '../../../utils/abcSoundsData.js';
 import { playSound } from '../../../utils/audioHelper.js'; // Імпорт вашої утиліти
-import ConfettiPopper from '../../ConfettiPopper';
+import ConfettiPopper from '../../ui/ConfettiPopper';
 
-import taskSound from '../../../../public/assets/games/level_1/abc/sounds/ABC_task_1.mp3';
-import win from '../../../../public/assets/sounds/confetti-pop.mp3';
+import taskSound from '/assets/games/level_1/abc/sounds/ABC_task_1.mp3';
+import win from '/assets/sounds/confetti-pop.mp3';
 
 const ABC = ({ onSuccess }) => {
   const [showConfetti, setShowConfetti] = useState(false);
