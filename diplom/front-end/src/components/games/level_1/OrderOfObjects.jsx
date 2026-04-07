@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import styles from './OrderOfObjects.module.css';
+import styles from '../../../assets/css/components/games/level_1/OrderOfObjects.module.css';
 import ConfettiPopper from '../../ui/ConfettiPopper';
 import { playSound } from '../../../utils/audioHelper.js';
 

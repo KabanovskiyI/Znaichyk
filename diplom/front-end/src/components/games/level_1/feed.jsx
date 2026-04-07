@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ConfettiPopper from '../../ui/ConfettiPopper';
-import styles from './feed.module.css';
+import styles from '../../../assets/css/components/games/level_1/feed.module.css';
 
 import { playSound } from '../../../utils/audioHelper.js'; 
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import styles from './syllables.module.css';
+import styles from '../../../assets/css/components/games/level_2/syllables.module.css';
 import SoundIcon from '../../../utils/SoundIcon';
 import { buttonsData } from '../../../utils/buttonsData.js';
 // Імпортуємо нові дані складів

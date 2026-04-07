@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import styles from './abc.module.css';
+import styles from '../../../assets/css/components/games/level_1/abc.module.css';
 import SoundIcon from '../../../utils/SoundIcon';
 import { buttonsData } from '../../../utils/buttonsData.js';
 import { alphabetData } from '../../../utils/abcSoundsData.js';

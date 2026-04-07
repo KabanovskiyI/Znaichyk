@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import styles from './simon.module.css';
+import styles from '../../../assets/css/components/games/level_2/simon.module.css';
 import { playSound } from '../../../utils/audioHelper.js';
 import ConfettiPopper from '../../ui/ConfettiPopper';
 

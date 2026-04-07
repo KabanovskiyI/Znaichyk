@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import styles from './match.module.css';
+import styles from '../../../assets/css/components/games/level_3/match.module.css';
 import { playSound } from '../../../utils/audioHelper.js';
 import ConfettiPopper from '../../ui/ConfettiPopper';
 

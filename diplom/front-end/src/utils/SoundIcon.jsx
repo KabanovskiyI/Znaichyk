@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import styles from './soundsIcon.module.css';
+import styles from '../assets/css/utils/soundsIcon.module.css';
 import gromophone from '/assets/images/sound/gromophone.svg';
 import sprite1 from '/assets/images/sound/sprite_1.svg';
 import sprite2 from '/assets/images/sound/sprite_2.svg';

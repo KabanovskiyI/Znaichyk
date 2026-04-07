@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import styles from './puzzle.module.css';
+import styles from '../../../assets/css/components/games/level_2/puzzle.module.css';
 import { playSound } from '../../../utils/audioHelper.js';
 import { getRandomPuzzleImage } from '../../../utils/puzzleHelper.js';
 import ConfettiPopper from '../../ui/ConfettiPopper';

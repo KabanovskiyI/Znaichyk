@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import './Games.css';
+import '../assets/css/pages/Games.css';
 import Play from '/assets/images/play.svg';
 import Header from '../components/ui/header.jsx';
 import GameBackground from '../components/ui/background.jsx';

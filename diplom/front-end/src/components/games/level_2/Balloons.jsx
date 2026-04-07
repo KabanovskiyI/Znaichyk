@@ -2,7 +2,7 @@ import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ConfettiPopper from '../../ui/ConfettiPopper';
 import { playSound } from '../../../utils/audioHelper.js'; 
-import styles from './balloons.module.css';
+import styles from '../../../assets/css/components/games/level_2/balloons.module.css';
 
 const BALLOON_ASSETS = [
   '/assets/games/level_2/balloons/images/lime.svg',

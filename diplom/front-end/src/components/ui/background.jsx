@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styles from './background.module.css';
+import styles from '../../assets/css/components/ui/background.module.css';
 
 import skySrc from '/assets/images/Background/Sky.svg';
 import lgSrc from '/assets/images/Background/Lg1.svg';
