@@ -13,6 +13,7 @@ import Baloons from '../components/games/level_2/Balloons.jsx';
 import Puzzle from '../components/games/level_2/puzzle.jsx';
 import Simon from '../components/games/level_2/simon.jsx';
 import Match from '../components/games/level_3/match.jsx';
+import Bubble from '../components/games/level_3/bubble.jsx';
 const MAX_PROGRESS = 5;
 
 const Games = () => {
@@ -26,7 +27,8 @@ const Games = () => {
     //{ id: 'syllables', Component: Syllables },
     //{ id: 'puzzle', Component: Puzzle },
     //{ id: 'simon', Component: Simon },
-    { id: 'match', Component: Match },
+    //{ id: 'match', Component: Match },
+    { id: 'Bubble', Component: Bubble },
   ], []);
 
   // Состояние прогресса и фона
@@ -48,7 +50,8 @@ const Games = () => {
     //'syllables': 0,
     //'puzzle': 0,
     //'simon': 0,
-    'match': 0,
+    //'match': 0,
+    'Bubble': 0,
   });
 
   // Вспомогательная функция для выбора игры с учетом блокировок
