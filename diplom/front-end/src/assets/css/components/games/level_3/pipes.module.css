@@ -1,0 +1,97 @@
+.gameWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Контейнер тепер має колір темної трави з прозорістю */
+.gridContainer {
+    display: grid;
+    grid-template-columns: repeat(5, 80px);
+    grid-template-rows: repeat(5, 80px);
+    gap: 10px;
+    background: rgba(107, 146, 55, 0.3); /* Напівпрозорий зелений */
+    padding: 15px;
+    border-radius: 25px;
+    border: 4px solid #8ec549; /* Яскравий зелений контур */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Порожня клітинка — колір ґрунту або піску */
+.emptyCell {
+    width: 100%;
+    height: 100%;
+    background: rgba(212, 190, 150, 0.4); 
+    border-radius: 15px;
+}
+
+/* Клітинка з трубою — використовуємо колір жовтого дерева як базу */
+.pipeCell {
+    width: 100%;
+    height: 100%;
+    background: #f9d423; /* Теплий жовтий колір */
+    border-radius: 15px;
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.1s ease-out, background-color 0.2s ease;
+    /* Об'ємна тінь у колір самої плитки (глибина) */
+    box-shadow: 0 5px 0px #d4b11d; 
+}
+
+/* Коли труба активована (підключена до старту) */
+.pipeCell:has(.isActive) {
+    background: #ffecb3;
+}
+
+.pipeCell:hover {
+    transform: translateY(-2px);
+    background: #ffe066;
+}
+
+.pipeCell:active {
+    transform: translateY(2px);
+    box-shadow: 0 0px 0px #d4b11d;
+}
+
+/* Заблокована клітинка — колір осіннього куща */
+.pipeCell.locked {
+    cursor: not-allowed;
+    background: #f4a482; /* Теракотовий/Помаранчевий */
+    box-shadow: 0 5px 0px #c97e60;
+}
+
+.pipeInner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Самі труби робимо товстішими та яскравішими */
+.pipeSvg {
+    width: 85%;
+    height: 85%;
+    /* Додаємо фільтр, щоб труби виглядали як 3D об'єкти */
+    filter: drop-shadow(0 2px 1px rgba(0,0,0,0.15));
+}
+
+.lockIcon {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 1rem;
+    background: #fff;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    border: 2px solid #c97e60;
+}

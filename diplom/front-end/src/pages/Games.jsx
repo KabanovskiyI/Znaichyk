@@ -14,6 +14,7 @@ import Puzzle from '../components/games/level_2/puzzle.jsx';
 import Simon from '../components/games/level_2/simon.jsx';
 import Match from '../components/games/level_3/match.jsx';
 import Bubble from '../components/games/level_3/bubble.jsx';
+import Pipes from '../components/games/level_3/pipes.jsx';
 const MAX_PROGRESS = 5;
 
 const Games = () => {
@@ -28,7 +29,8 @@ const Games = () => {
     //{ id: 'puzzle', Component: Puzzle },
     //{ id: 'simon', Component: Simon },
     //{ id: 'match', Component: Match },
-    { id: 'Bubble', Component: Bubble },
+    //{ id: 'Bubble', Component: Bubble },
+    { id: 'Pipes', Component: Pipes },
   ], []);
 
   // Состояние прогресса и фона
