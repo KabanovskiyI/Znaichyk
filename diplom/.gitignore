@@ -1,0 +1,29 @@
+# Python (Virtual Environments)
+venv/
+.venv/
+env/
+bin/
+include/
+lib/
+share/
+pyvenv.cfg
+*.pyc
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+.env
+__pycache__/
+
+# Node / React (Frontend)
+front-end/node_modules/
+front-end/dist/
+front-end/build/
+.eslintcache
+npm-debug.log*
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
