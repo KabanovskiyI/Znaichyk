@@ -15,108 +15,56 @@ import Simon from '../components/games/level_2/simon.jsx';
 import Match from '../components/games/level_3/match.jsx';
 import Bubble from '../components/games/level_3/bubble.jsx';
 import Pipes from '../components/games/level_3/pipes.jsx';
-const MAX_PROGRESS = 5;
+import Balance from '../components/games/level_3/mathBalanceGame.jsx';
 
+// Кількість ігор тепер автоматично дорівнює довжині списку
 const Games = () => {
-  // Список игр
   const gamePool = useMemo(() => [
-    //{ id: 'feed', Component: Feed },
-    //{ id: 'balloons', Component: Baloons },
-    //{ id: 'abc', Component: ABC },
-    //{ id: 'odd-one-out', Component: OddOneOut },
-    //{ id: 'order-of-objects', Component: OrderOfObjects },
-    //{ id: 'syllables', Component: Syllables },
-    //{ id: 'puzzle', Component: Puzzle },
-    //{ id: 'simon', Component: Simon },
-    //{ id: 'match', Component: Match },
-    //{ id: 'Bubble', Component: Bubble },
-    { id: 'Pipes', Component: Pipes },
+    { id: 'balloons', Component: Bubble },
+    { id: 'syllables', Component: Match },
+    { id: 'puzzle', Component: Balance },
+    { id: 'simon', Component: Pipes },
+
   ], []);
 
-  // Состояние прогресса и фона
+  const MAX_PROGRESS = gamePool.length;
+
+  // Стан прогресу та фону
   const [progress, setProgress] = useState(0);
   const [bgStep, setBgStep] = useState(0);
 
-  // Состояние игры
+  // Стан гри
   const [isPlaying, setIsPlaying] = useState(false);
   const [CurrentGame, setCurrentGame] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Храним счетчики блокировки для каждой игры: { id: остаток_ходов }
-  const [cooldowns, setCooldowns] = useState({
-    //'feed': 0,
-    //'balloons': 0,
-    //'abc': 0,
-    //'odd-one-out': 0,
-    //'order-of-objects': 0,
-    //'syllables': 0,
-    //'puzzle': 0,
-    //'simon': 0,
-    //'match': 0,
-    'Bubble': 0,
-  });
-
-  // Вспомогательная функция для выбора игры с учетом блокировок
-  const pickRandomGame = useCallback((currentCooldowns) => {
-    // Игра доступна, если её счетчик равен 0
-    const availableGames = gamePool.filter(game => (currentCooldowns[game.id] || 0) === 0);
-    
-    // Если по какой-то причине все игры заблокированы, берем любую
-    const pool = availableGames.length > 0 ? availableGames : gamePool;
-    
-    return pool[Math.floor(Math.random() * pool.length)];
-  }, [gamePool]);
-
-  // Функция обновления счетчиков
-  const updateCooldowns = (nextGameId) => {
-    setCooldowns(prev => {
-      const newCooldowns = { ...prev };
-      
-      // 1. Уменьшаем счетчик у всех, кто уже «отдыхает»
-      Object.keys(newCooldowns).forEach(id => {
-        if (newCooldowns[id] > 0) {
-          newCooldowns[id] -= 1;
-        }
-      });
-
-      // 2. Ставим новой игре 2 (она пропустит следующие 2 хода)
-      newCooldowns[nextGameId] = 2;
-      
-      return newCooldowns;
-    });
-  };
-
+  // Логіка старту гри
   const handleStartGame = () => {
     setIsTransitioning(true);
     setBgStep(1);
 
-    // Сбрасываем кулдауны при новом старте
-    const resetCooldowns = { 'feed': 0, 'abc': 0, 'odd-one-out': 0, 'order-of-objects': 0 };
-    setCooldowns(resetCooldowns);
-
     setTimeout(() => {
-      const firstGame = pickRandomGame(resetCooldowns);
-      setCurrentGame(firstGame);
-      updateCooldowns(firstGame.id);
-      
+      // Беремо найпершу гру зі списку (індекс 0)
+      setCurrentGame(gamePool[0]);
       setIsPlaying(true);
       setIsTransitioning(false);
     }, 1200);
   };
 
+  // Логіка завершення поточної гри
   const handleGameFinish = (result) => {
     if (!result) return;
 
     setIsTransitioning(true);
-    // Мгновенно убираем игру, чтобы избежать бага с повторным звуком
+    // Прибираємо поточну гру перед переходом
     setCurrentGame(null);
 
     setProgress(prev => {
-      const next = prev + 1;
-      setBgStep(next + 1);
+      const nextProgress = prev + 1;
+      setBgStep(nextProgress + 1);
 
-      if (next >= MAX_PROGRESS) {
-        // Конец серии игр
+      if (nextProgress >= MAX_PROGRESS) {
+        // Якщо це була остання гра в списку
         setTimeout(() => {
           setIsPlaying(false);
           setProgress(0);
@@ -124,29 +72,14 @@ const Games = () => {
           setIsTransitioning(false);
         }, 2000);
       } else {
-        // Переход к следующей игре
+        // Перехід до наступної гри за порядком (індекс = nextProgress)
         setTimeout(() => {
-          // Важно: используем актуальное состояние кулдаунов через функциональный сеттер
-          // или просто выбираем игру на основе текущего состояния
-          setCooldowns(currentCool => {
-            const nextGame = pickRandomGame(currentCool);
-            
-            // Запускаем отрисовку новой игры
-            setCurrentGame(nextGame);
-            setIsTransitioning(false);
-
-            // Возвращаем обновленные кулдауны
-            const updated = { ...currentCool };
-            Object.keys(updated).forEach(id => {
-                if (updated[id] > 0) updated[id] -= 1;
-            });
-            updated[nextGame.id] = 2;
-            return updated;
-          });
+          setCurrentGame(gamePool[nextProgress]);
+          setIsTransitioning(false);
         }, 1200);
       }
 
-      return next;
+      return nextProgress;
     });
   };
 

@@ -1,0 +1,165 @@
+.gameWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 70px;
+    padding-top: 20px;
+    user-select: none;
+}
+
+.stage {
+    position: relative;
+    width: 550px;
+    height: 380px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Опора */
+.mainStand {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.verticalPost {
+    width: 16px;
+    height: 260px;
+    background: #d4be96;
+    border-radius: 8px 8px 0 0;
+    box-shadow: inset -4px 0 0 rgba(0,0,0,0.1);
+}
+
+.base {
+    width: 150px;
+    height: 20px;
+    background: #8ec549;
+    border-radius: 15px 15px 5px 5px;
+    box-shadow: 0 4px 0 #6b9237;
+}
+
+/* Коромисло */
+.balanceBeam {
+    position: absolute;
+    top: 110px;
+    width: 460px;
+    height: 16px;
+    background: #f9d423;
+    border-radius: 20px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    box-shadow: 0 5px 0 #d4b11d;
+}
+
+.pivotPoint {
+    position: absolute;
+    top: -8px;
+    width: 32px;
+    height: 32px;
+    background: #f9d423;
+    border: 5px solid #d4b11d;
+    border-radius: 50%;
+}
+
+/* Конструкція шальок */
+.plateAssembly {
+    position: absolute;
+    top: 8px;
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-origin: top center;
+}
+
+.rope {
+    position: absolute;
+    top: 0;
+    width: 3px;
+    height: 90px;
+    background: #b5a381;
+    transform-origin: top center;
+}
+
+.ropeLeft { transform: rotate(35deg); left: 90px; }
+.ropeRight { transform: rotate(-35deg); right: 90px; }
+
+.plateBowl {
+    margin-top: 75px;
+    width: 180px;
+    min-height: 70px;
+    background: #fdf6e3;
+    border: 5px solid #f9d423;
+    border-radius: 10px 10px 90px 90px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    padding: 10px 15px;
+    gap: 6px;
+    box-shadow: inset 0 -6px 0 rgba(0,0,0,0.05), 0 8px 15px rgba(0,0,0,0.1);
+    z-index: 5;
+}
+
+/* --- ПОВЕРНЕНИЙ СТИЛЬ ГИРЬКИ --- */
+.weight {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial Rounded MT Bold', sans-serif;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    cursor: grab;
+    touch-action: none;
+    z-index: 1;
+    border-radius: 12px 12px 8px 8px;
+    box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.2s;
+    transform-origin: bottom center;
+}
+
+.weight.fixedWeight { cursor: default; }
+.weight.inPlate { box-shadow: none !important; }
+
+/* Ручка (повернуто) */
+.weight::before {
+    content: '';
+    position: absolute;
+    top: -25%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45%;
+    height: 35%;
+    background: inherit;
+    border-radius: 10px 10px 0 0;
+    z-index: -1;
+    -webkit-mask-image: radial-gradient(circle at 50% 115%, transparent 40%, black 45%);
+    mask-image: radial-gradient(circle at 50% 115%, transparent 40%, black 45%);
+}
+
+/* Відблиск (повернуто) */
+.weight::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 12%;
+    width: 25%;
+    height: 18%;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+}
+
+.optionsGrid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: flex-end;
+    min-height: 110px;
+    padding: 15px 30px;
+}
