@@ -1,9 +1,13 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import '../assets/css/pages/Games.css';
+import React, { useState, useEffect, useCallback } from 'react';
+import styles from '../assets/css/pages/Games.module.css';
 import Play from '/assets/images/play.svg';
+
+// UI Компоненти
 import Header from '../components/ui/header.jsx';
 import GameBackground from '../components/ui/background.jsx';
+import VictoryScreen from '../components/ui/VictoryScreen.jsx';
 
+// Імпорти ігор
 import Feed from '../components/games/level_1/feed.jsx';
 import ABC from '../components/games/level_1/abc.jsx';
 import OddOneOut from '../components/games/level_1/OddOneOut.jsx';
@@ -17,96 +21,162 @@ import Bubble from '../components/games/level_3/bubble.jsx';
 import Pipes from '../components/games/level_3/pipes.jsx';
 import Balance from '../components/games/level_3/mathBalanceGame.jsx';
 
-// Кількість ігор тепер автоматично дорівнює довжині списку
+const ALL_GAMES_REGISTRY = {
+  language: { lvl_1: ABC, lvl_2: Syllables, lvl_3: Match },
+  math: { lvl_1: OrderOfObjects, lvl_2: Baloons, lvl_3: Balance },
+  logic: { lvl_1: OddOneOut, lvl_2: Puzzle, lvl_3: Pipes },
+  memory: { lvl_1: Feed, lvl_2: Simon, lvl_3: Bubble }
+};
+
 const Games = () => {
-  const gamePool = useMemo(() => [
-    { id: 'balloons', Component: Bubble },
-    { id: 'syllables', Component: Match },
-    { id: 'puzzle', Component: Balance },
-    { id: 'simon', Component: Pipes },
-
-  ], []);
-
-  const MAX_PROGRESS = gamePool.length;
-
-  // Стан прогресу та фону
+  const [gamePool, setGamePool] = useState([]);
+  const [CurrentGame, setCurrentGame] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isVictory, setIsVictory] = useState(false);
   const [progress, setProgress] = useState(0);
   const [bgStep, setBgStep] = useState(0);
-
-  // Стан гри
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [CurrentGame, setCurrentGame] = useState(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
-  // Логіка старту гри
-  const handleStartGame = () => {
-    setIsTransitioning(true);
-    setBgStep(1);
+  // НОВИЙ СТАН: чи це перший захід на сторінку
+  const [hasStartedOnce, setHasStartedOnce] = useState(false);
 
+  // 1. Оновлений fetchSequence (тепер повертає дані, щоб ми могли використати їх одразу)
+  const fetchSequence = useCallback(async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`http://localhost:8000/game/config/`, {
+        credentials: 'include'
+      });
+      const data = await response.json();
+      
+      const readySequence = data.sequence.map((gameData, index) => ({
+        id: gameData.id,
+        Component: ALL_GAMES_REGISTRY[gameData.topic][gameData.lvl_key],
+        instanceId: `${gameData.id}-${index}-${Date.now()}`
+      }));
+
+      setGamePool(readySequence);
+      return readySequence; // Повертаємо для handleRestart
+    } catch (e) {
+      console.error("Помилка завантаження черги:", e);
+      return [];
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { 
+    fetchSequence(); 
+  }, [fetchSequence]);
+
+  // 2. Початок гри (натискання кнопки Плей)
+  const handleStartGame = () => {
+    if (gamePool.length === 0 || isTransitioning) return;
+    
+    setHasStartedOnce(true); // Фіксуємо, що гра вже запускалася
+    setIsTransitioning(true);
+    setBgStep(1); 
+    
     setTimeout(() => {
-      // Беремо найпершу гру зі списку (індекс 0)
       setCurrentGame(gamePool[0]);
       setIsPlaying(true);
       setIsTransitioning(false);
-    }, 1200);
+    }, 800);
   };
 
-  // Логіка завершення поточної гри
-  const handleGameFinish = (result) => {
-    if (!result) return;
-
+  const handleGameFinish = useCallback((result) => {
+    if (!result || isTransitioning) return;
     setIsTransitioning(true);
-    // Прибираємо поточну гру перед переходом
-    setCurrentGame(null);
-
+    setCurrentGame(null); 
+    
     setProgress(prev => {
-      const nextProgress = prev + 1;
-      setBgStep(nextProgress + 1);
-
-      if (nextProgress >= MAX_PROGRESS) {
-        // Якщо це була остання гра в списку
-        setTimeout(() => {
-          setIsPlaying(false);
-          setProgress(0);
-          setBgStep(0);
-          setIsTransitioning(false);
-        }, 2000);
+      const next = prev + 1;
+      setBgStep(next + 1);
+      
+      if (next >= 5) {
+        setTimeout(() => { 
+          setIsPlaying(false); 
+          setIsVictory(true); 
+          setIsTransitioning(false); 
+        }, 1000);
       } else {
-        // Перехід до наступної гри за порядком (індекс = nextProgress)
-        setTimeout(() => {
-          setCurrentGame(gamePool[nextProgress]);
-          setIsTransitioning(false);
-        }, 1200);
+        setTimeout(() => { 
+          setCurrentGame(gamePool[next]); 
+          setIsTransitioning(false); 
+        }, 1000);
       }
-
-      return nextProgress;
+      return next;
     });
+  }, [gamePool, isTransitioning]);
+
+  // 3. Оновлений Рестарт (Автоматичний перехід до наступного пулу)
+  const handleRestart = async () => {
+    if (isTransitioning) return;
+    setIsTransitioning(true);
+
+    try {
+      // 1. Повідомляємо бекенд
+      await fetch(`http://localhost:8000/game/complete/`, { credentials: 'include' });
+      
+      // 2. Отримуємо новий пул і чекаємо на результат
+      const newPool = await fetchSequence();
+
+      // 3. Скидаємо прогрес, але НЕ вимикаємо isPlaying
+      setIsVictory(false);
+      setProgress(0);
+      setBgStep(1); // Одразу ставимо 1, бо ми переходимо до гри
+
+      // 4. Одразу запускаємо першу гру з нового пулу
+      if (newPool.length > 0) {
+        setTimeout(() => {
+          setCurrentGame(newPool[0]);
+          setIsPlaying(true);
+          setIsTransitioning(false);
+        }, 800);
+      }
+      
+    } catch (e) {
+      console.error("Помилка при рестарті:", e);
+      setIsTransitioning(false);
+    }
   };
+
+  if (isLoading && gamePool.length === 0) {
+    return <div className={styles.loadingScreen}>Завантаження...</div>;
+  }
 
   return (
-    <div className="game-main-layout">
+    <div className={styles.gameMainLayout}>
       <GameBackground step={bgStep} />
 
-      {isPlaying && (
-        <Header currentStep={progress} max={MAX_PROGRESS} />
-      )}
+      {isVictory && <VictoryScreen onFinish={handleRestart} />}
 
-      <main className="content">
-        {!isPlaying ? (
-          <div className={`start-screen ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
-            <button className="play-button-container" onClick={handleStartGame}>
-              <img src={Play} alt="Play" className="play-icon" />
+      {isPlaying && !isVictory && <Header currentStep={progress} max={5} />}
+
+      <main className={styles.content}>
+        {/* 
+            Кнопка показується ТІЛЬКИ якщо:
+            1. Ми ще не почали грати (isPlaying === false)
+            2. Це не екран перемоги
+            3. Це ПЕРШИЙ запуск (hasStartedOnce === false)
+        */}
+        {!isPlaying && !isVictory && !isLoading && !hasStartedOnce && (
+          <div className={`${styles.startScreen} ${isTransitioning ? styles.fadeOut : styles.fadeIn}`}>
+            <button className={styles.playButtonContainer} onClick={handleStartGame}>
+              <img src={Play} alt="Play" className={styles.playIcon} />
             </button>
           </div>
-        ) : (
-          CurrentGame && (
-            <div className={`game-wrapper ${isTransitioning ? 'fade-out' : 'fade-in'}`}>
-              <CurrentGame.Component
-                key={CurrentGame.id}
-                onSuccess={handleGameFinish}
-              />
-            </div>
-          )
+        )}
+
+        {isPlaying && CurrentGame && !isVictory && (
+          <div className={`${styles.gameWrapper} ${isTransitioning ? styles.fadeOut : styles.fadeIn}`}>
+            <CurrentGame.Component
+              key={CurrentGame.instanceId}
+              onSuccess={handleGameFinish}
+            />
+          </div>
         )}
       </main>
     </div>

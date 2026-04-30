@@ -1,60 +1,66 @@
-html, body, #root {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-color: #87CEEB; /* Цвет неба, чтобы не было белых вспышек */
-}
+/* Games.module.css */
 
-.game-main-layout {
+.gameMainLayout {
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  position: relative;
+  /* Замість vw/vh використовуємо відсотки, щоб уникнути проблем зі скролбарами */
+  width: 100%;
+  height: 100%;
+  /* Фіксуємо позицію, щоб layout не "стрибав" */
+  position: fixed;
+  top: 0;
+  left: 0;
   overflow: hidden;
-  /* Убираем любой фон, чтобы видеть GameBackground */
   background: transparent;
+  /* Захист від тач-скролу на мобільних */
+  touch-action: none;
 }
 
-/* Контент занимает всё место и центрирует игру */
 .content {
   flex: 1;
   width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   z-index: 2;
   background: transparent;
+  overflow: hidden;
 }
 
-.start-screen {
+.startScreen {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
-.play-button-container {
+.playButtonContainer {
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
+  /* Щоб кнопка не вилазила за межі на малих екранах */
+  max-width: 90vw; 
   transition: transform 0.3s ease;
   animation: pulse 2s infinite;
+  outline: none;
 }
 
-.play-button-container:hover {
+.playButtonContainer:hover {
   transform: scale(1.1);
   filter: brightness(1.1);
 }
 
-.play-icon {
-  width: 600px;
+.playIcon {
+  /* 600px — це дуже багато для мобільних, додамо обмеження */
+  width: 100%;
+  max-width: 600px;
   height: auto;
+  display: block;
 }
 
 @keyframes pulse {
@@ -63,22 +69,23 @@ html, body, #root {
   100% { transform: scale(1); }
 }
 
-.game-wrapper {
+.gameWrapper {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   transition: opacity 0.6s ease-in-out, transform 0.6s ease-in-out;
+  overflow: hidden;
 }
 
-.fade-out {
+.fadeOut {
   opacity: 0;
   transform: scale(0.9);
   pointer-events: none;
 }
 
-.fade-in {
+.fadeIn {
   opacity: 1;
   transform: scale(1);
 }
