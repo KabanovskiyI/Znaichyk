@@ -1,0 +1,25 @@
+body {
+    overflow-x: hidden;
+    background-color: var(--bg-sky);
+}
+.bg-cloud-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+.bg-cloud { position: absolute; background-repeat: no-repeat; background-size: contain; opacity: 0.6; animation: floatUp linear infinite; filter: none; }
+@keyframes floatUp { from { transform: translateY(110vh); } to { transform: translateY(-20vh); } }
+.landing-wrapper { display: flex; flex-direction: column; align-items: center; padding: 60px 0; gap: 80px; max-width: 1000px; margin: 0 auto; }
+.cloud-item { position: relative; width: 500px; min-height: 250px; display: flex; align-items: center; justify-content: center; z-index: 2; transition: transform 0.3s ease; }
+.cloud-shape { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; object-fit: contain; filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05)); }
+.cloud-content { position: relative; z-index: 5; padding: 40px 60px; text-align: center; font-size: 1.25rem; font-weight: 700; color: var(--text-color); max-width: 80%; }
+.cloud-left { align-self: flex-start; margin-left: 5%; }
+.cloud-right { align-self: flex-end; margin-right: 5%; }
+.cloud-center { align-self: center; }
+@media (max-width: 768px) { .cloud-item { width: 90%; margin: 0 auto !important; } .cloud-content { font-size: 1.1rem; padding: 30px; } }
+.cloud-1 { width: 120px; height: 60px; left: 5%; animation-duration: 40s; animation-delay: -10s; background-image: url('/static/images/clouds/CloudFrontLayer1.svg'); }
+.cloud-2 { width: 180px; height: 90px; left: 15%; animation-duration: 55s; animation-delay: -35s; background-image: url('/static/images/clouds/CloudBackLayer1.svg'); opacity: 0.3; }
+.cloud-3 { width: 140px; height: 70px; left: 45%; animation-duration: 35s; animation-delay: -5s; background-image: url('/static/images/clouds/CloudFrontLayer2.svg'); }
+.cloud-4 { width: 200px; height: 100px; left: 70%; animation-duration: 50s; animation-delay: -25s; background-image: url('/static/images/clouds/CloudBackLayer2.svg'); opacity: 0.4; }
+.cloud-5 { width: 110px; height: 55px; left: 85%; animation-duration: 30s; animation-delay: -15s; background-image: url('/static/images/clouds/CloudFrontLayer3.svg'); }
+.cloud-6 { width: 160px; height: 80px; left: 30%; animation-duration: 45s; animation-delay: -40s; background-image: url('/static/images/clouds/CloudFrontLayer1.svg'); }
+.cloud-7 { width: 130px; height: 65px; left: 60%; animation-duration: 38s; animation-delay: -20s; background-image: url('/static/images/clouds/CloudFrontLayer2.svg'); }
+.cloud-8 { width: 190px; height: 95px; left: 10%; animation-duration: 60s; animation-delay: -50s; background-image: url('/static/images/clouds/CloudBackLayer1.svg'); opacity: 0.25; }
+.cloud-9 { width: 100px; height: 50px; left: 90%; animation-duration: 32s; animation-delay: -2s; background-image: url('/static/images/clouds/CloudFrontLayer3.svg'); }
+.cloud-10 { width: 170px; height: 85px; left: 40%; animation-duration: 48s; animation-delay: -12s; background-image: url('/static/images/clouds/CloudBackLayer2.svg'); opacity: 0.35; }

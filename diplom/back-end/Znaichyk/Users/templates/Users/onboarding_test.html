@@ -4,43 +4,7 @@
 {% block title %}Визначення рівня | Znaichyk{% endblock %}
 
 {% block styles %}
-    <style>
-        /* Стилі для плавного перемикання слайдів */
-        .question-slide {
-            display: none;
-            animation: fadeIn 0.5s;
-        }
-        .question-slide.active {
-            display: block;
-        }
-        .answer-btn {
-            background: #f0f9ff;
-            border: 3px solid #e0f4ff;
-            color: #5d5d5d;
-            padding: 15px;
-            border-radius: 20px;
-            width: 100%;
-            margin-bottom: 15px;
-            cursor: pointer;
-            font-size: 1.1rem;
-            font-weight: 700;
-            transition: all 0.2s;
-            text-align: left;
-        }
-        .answer-btn:hover {
-            border-color: #7b68ee;
-            background: #ffffff;
-            transform: translateY(-2px);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/pages/onboarding_test.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -60,7 +24,7 @@
 
         <!-- Питання 1: Мова -->
         <div class="question-slide active" id="slide-1">
-            <h2 style="color: #7b68ee; margin-bottom: 20px;">Як дитина взаємодіє з літерами та читанням?</h2>
+            <h2 class="question-title">Як дитина взаємодіє з літерами та читанням?</h2>
             <button class="answer-btn" onclick="selectAnswer('language', 1, 2)">Дитина ще не знає літер</button>
             <button class="answer-btn" onclick="selectAnswer('language', 2, 2)">Дитина знає літери, але ще не читає</button>
             <button class="answer-btn" onclick="selectAnswer('language', 3, 2)">Дитина вже читає по складах або цілими словами</button>
@@ -68,7 +32,7 @@
 
         <!-- Питання 2: Математика -->
         <div class="question-slide" id="slide-2">
-            <h2 style="color: #7b68ee; margin-bottom: 20px;">Який рівень навичок рахування у дитини?</h2>
+            <h2 class="question-title">Який рівень навичок рахування у дитини?</h2>
             <button class="answer-btn" onclick="selectAnswer('math', 1, 3)">Дитина ще не вміє рахувати</button>
             <button class="answer-btn" onclick="selectAnswer('math', 2, 3)">Дитина вміє рахувати, але не розпізнає цифри</button>
             <button class="answer-btn" onclick="selectAnswer('math', 3, 3)">Дитина знає цифри, але ще не впевнено рахує</button>
@@ -76,7 +40,7 @@
 
         <!-- Питання 3: Логіка -->
         <div class="question-slide" id="slide-3">
-            <h2 style="color: #7b68ee; margin-bottom: 20px;">Які логічні завдання найкраще підходять дитині?</h2>
+            <h2 class="question-title">Які логічні завдання найкраще підходять дитині?</h2>
             <button class="answer-btn" onclick="selectAnswer('logic', 1, 4)">Знайти зайвий предмет серед інших</button>
             <button class="answer-btn" onclick="selectAnswer('logic', 2, 4)">Складати прості пазли</button>
             <button class="answer-btn" onclick="selectAnswer('logic', 3, 4)">Проходити лабіринти та знаходити правильний шлях</button>
@@ -84,44 +48,21 @@
 
         <!-- Питання 4: Пам'ять -->
         <div class="question-slide" id="slide-4">
-            <h2 style="color: #7b68ee; margin-bottom: 20px;">Які завдання на пам’ять дитина може виконувати?</h2>
+            <h2 class="question-title">Які завдання на пам’ять дитина може виконувати?</h2>
             <button class="answer-btn" onclick="selectAnswer('memory', 1, 'submit')">Запам’ятати порядок кількох об’єктів і відтворити його</button>
             <button class="answer-btn" onclick="selectAnswer('memory', 2, 'submit')">Повторити послідовність сигналів (як у грі “Simon”)</button>
             <button class="answer-btn" onclick="selectAnswer('memory', 3, 'submit')">Знаходити однакові пари серед карток</button>
         </div>
-        <div id="final-step" style="display: none; text-align: center; animation: fadeIn 0.5s;">
-            <h2 style="color: #7b68ee; margin-bottom: 20px;">Готуємо ваші завдання...</h2>
+        <div id="final-step" class="final-step">
+            <h2 class="question-title">Готуємо ваші завдання...</h2>
             <p>Зачекайте секунду, ми підбираємо найкращу програму для дитини.</p>
-            <div class="loader" style="margin: 20px auto; border: 4px solid #f3f3f3; border-top: 4px solid #7b68ee; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;"></div>
+            <div class="loader"></div>
         </div>
     </div>
 </main>
 
-<script>
-function selectAnswer(skill, level, nextSlideIndex) {
-    // Записуємо значення
-    document.getElementById('input_' + skill).value = level;
+{% endblock %}
 
-    // Ховаємо поточний активний слайд
-    const currentSlide = document.querySelector('.question-slide.active');
-    if (currentSlide) {
-        currentSlide.classList.remove('active');
-    }
-
-    if (nextSlideIndex === 'submit') {
-        // 1. Приховуємо заголовок та підзаголовок всієї картки
-        document.querySelector('.auth-card h1').style.display = 'none';
-        document.querySelector('.auth-subtitle').style.display = 'none';
-
-        // 2. Показуємо фінальний екран "Завантаження/Успіх"
-        document.getElementById('final-step').style.display = 'block';
-
-        // 3. Відправляємо форму
-        document.getElementById('test-form').submit();
-    } else {
-        // Показуємо наступне питання
-        document.getElementById('slide-' + nextSlideIndex).classList.add('active');
-    }
-}
-</script>
+{% block scripts %}
+<script src="{% static 'js/pages/onboarding_test.js' %}"></script>
 {% endblock %}

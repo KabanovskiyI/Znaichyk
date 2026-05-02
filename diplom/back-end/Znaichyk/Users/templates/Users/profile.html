@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block styles %}<link rel="stylesheet" href="{% static 'css/pages/profile.css' %}">{% endblock %}
 {% block content %}
-<main style="text-align: center; padding: 50px;">
-    <div style="background: #f4f4f4; display: inline-block; padding: 20px; border-radius: 10px;">
+<main class="profile-main">
+    <div class="profile-card">
         <h3>Рівні навичок:</h3>
         <p>Мова: <b>{{ user.profile.language }}</b></p>
         <p>Математика: <b>{{ user.profile.math }}</b></p>

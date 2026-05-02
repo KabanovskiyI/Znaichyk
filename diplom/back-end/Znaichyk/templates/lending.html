@@ -3,108 +3,24 @@
 {% block title %}Головна | Znaichyk{% endblock %}
 
 {% block styles %}
-<style>
-    body {
-        overflow-x: hidden;
-        background-color: var(--bg-sky);
-    }
-
-    /* --- Фонові хмарки (Background) --- */
-    .bg-cloud-container {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-    }
-
-    .bg-cloud {
-        position: absolute;
-        background-repeat: no-repeat;
-        background-size: contain;
-        /* Робимо їх чіткішими */
-        opacity: 0.6; 
-        animation: floatUp linear infinite;
-        filter: none; /* Прибрали розмиття для чіткості */
-    }
-
-    @keyframes floatUp {
-        from { transform: translateY(110vh); }
-        to { transform: translateY(-20vh); }
-    }
-
-    /* --- Стилі для основних хмаринок контенту залишаються без змін --- */
-    .landing-wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 60px 0;
-        gap: 80px;
-        max-width: 1000px; 
-        margin: 0 auto;
-    }
-
-    .cloud-item {
-        position: relative;
-        width: 500px;
-        min-height: 250px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 2;
-        transition: transform 0.3s ease;
-    }
-
-    .cloud-shape {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        object-fit: contain;
-        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.05));
-    }
-
-    .cloud-content {
-        position: relative;
-        z-index: 5;
-        padding: 40px 60px;
-        text-align: center;
-        font-size: 1.25rem;
-        font-weight: 700;
-        color: var(--text-color);
-        max-width: 80%;
-    }
-
-    .cloud-left { align-self: flex-start; margin-left: 5%; }
-    .cloud-right { align-self: flex-end; margin-right: 5%; }
-    .cloud-center { align-self: center; }
-
-    @media (max-width: 768px) {
-        .cloud-item { width: 90%; margin: 0 auto !important; }
-        .cloud-content { font-size: 1.1rem; padding: 30px; }
-    }
-</style>
+<link rel="stylesheet" href="{% static 'css/pages/lending.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="bg-cloud-container">
     <!-- Хмаринки, які видно ОДРАЗУ (великий мінусовий delay) -->
-    <div class="bg-cloud" style="width: 120px; height: 60px; left: 5%; animation-duration: 40s; animation-delay: -10s; background-image: url('{% static 'images/clouds/CloudFrontLayer1.svg' %}');"></div>
-    <div class="bg-cloud" style="width: 180px; height: 90px; left: 15%; animation-duration: 55s; animation-delay: -35s; background-image: url('{% static 'images/clouds/CloudBackLayer1.svg' %}'); opacity: 0.3;"></div>
-    <div class="bg-cloud" style="width: 140px; height: 70px; left: 45%; animation-duration: 35s; animation-delay: -5s; background-image: url('{% static 'images/clouds/CloudFrontLayer2.svg' %}');"></div>
-    <div class="bg-cloud" style="width: 200px; height: 100px; left: 70%; animation-duration: 50s; animation-delay: -25s; background-image: url('{% static 'images/clouds/CloudBackLayer2.svg' %}'); opacity: 0.4;"></div>
-    <div class="bg-cloud" style="width: 110px; height: 55px; left: 85%; animation-duration: 30s; animation-delay: -15s; background-image: url('{% static 'images/clouds/CloudFrontLayer3.svg' %}');"></div>
-    <div class="bg-cloud" style="width: 160px; height: 80px; left: 30%; animation-duration: 45s; animation-delay: -40s; background-image: url('{% static 'images/clouds/CloudFrontLayer1.svg' %}');"></div>
+    <div class="bg-cloud cloud-1"></div>
+    <div class="bg-cloud cloud-2"></div>
+    <div class="bg-cloud cloud-3"></div>
+    <div class="bg-cloud cloud-4"></div>
+    <div class="bg-cloud cloud-5"></div>
+    <div class="bg-cloud cloud-6"></div>
     
     <!-- Додаткові хмаринки для густоти -->
-    <div class="bg-cloud" style="width: 130px; height: 65px; left: 60%; animation-duration: 38s; animation-delay: -20s; background-image: url('{% static 'images/clouds/CloudFrontLayer2.svg' %}');"></div>
-    <div class="bg-cloud" style="width: 190px; height: 95px; left: 10%; animation-duration: 60s; animation-delay: -50s; background-image: url('{% static 'images/clouds/CloudBackLayer1.svg' %}'); opacity: 0.25;"></div>
-    <div class="bg-cloud" style="width: 100px; height: 50px; left: 90%; animation-duration: 32s; animation-delay: -2s; background-image: url('{% static 'images/clouds/CloudFrontLayer3.svg' %}');"></div>
-    <div class="bg-cloud" style="width: 170px; height: 85px; left: 40%; animation-duration: 48s; animation-delay: -12s; background-image: url('{% static 'images/clouds/CloudBackLayer2.svg' %}'); opacity: 0.35;"></div>
+    <div class="bg-cloud cloud-7"></div>
+    <div class="bg-cloud cloud-8"></div>
+    <div class="bg-cloud cloud-9"></div>
+    <div class="bg-cloud cloud-10"></div>
 </div>
 
 <div class="landing-wrapper">

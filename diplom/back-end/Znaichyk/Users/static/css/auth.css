@@ -1,0 +1,149 @@
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.auth-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    border-radius: 50px;
+    border: 8px solid var(--white);
+    box-shadow: var(--shadow);
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+}
+
+.auth-card h2 {
+    color: var(--primary-purple);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 900;
+}
+
+.form-fields p {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.form-fields label {
+    display: block;
+    margin-bottom: 8px;
+    margin-left: 10px;
+    font-weight: 700;
+    color: var(--primary-purple);
+}
+
+.form-fields input {
+    width: 100%;
+    max-width: 350px;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    border: 4px solid #e0f4ff;
+    background-color: #f0f9ff;
+    border-radius: 25px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+    display: block;
+    margin: 0 auto;
+}
+
+.form-fields input:focus {
+    border-color: var(--primary-purple);
+    background-color: var(--white);
+    transform: scale(1.02);
+}
+
+.auth-button {
+    background: var(--primary-gradient);
+    color: var(--white);
+    border: none;
+    padding: 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 0 #5849c4;
+    transition: all 0.2s;
+    margin-top: 20px;
+}
+
+.auth-button:hover {
+    transform: translateY(2px);
+    box-shadow: 0 6px 0 #5849c4;
+    filter: brightness(1.1);
+}
+
+.auth-button:active {
+    transform: translateY(8px);
+    box-shadow: none;
+}
+
+.errorlist {
+    color: #ff6b6b;
+    list-style: none;
+    padding: 10px;
+    background: #fff0f0;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    border: 2px solid #ff6b6b;
+}
+
+.success-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+}
+
+.success-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #a3e4c0;
+    margin-bottom: 10px;
+}
+
+.auth-link-block {
+    text-decoration: none;
+    display: block;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 600px) {
+    .auth-card {
+        padding: 2rem 1.5rem;
+        border-radius: 35px;
+        border-width: 5px;
+    }
+}
