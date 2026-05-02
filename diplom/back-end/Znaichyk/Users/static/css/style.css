@@ -1,0 +1,274 @@
+/* Import Google Font для м'якого вигляду */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;900&display=swap');
+
+:root {
+    --bg-sky: #b9e9ff;
+    --primary-purple: #7b68ee;
+    --primary-gradient: linear-gradient(180deg, #8e7dff 0%, #6c5ce7 100%);
+    --secondary-green: #a3e4c0;
+    --accent-yellow: #fce084;
+    --white: #ffffff;
+    --text-color: #5d5d5d;
+    --shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    background-color: var(--bg-sky);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Навігація */
+nav {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 1rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 6px solid var(--white);
+}
+
+nav .logo {
+    color: var(--primary-purple);
+    font-weight: 900;
+    font-size: 1.8rem;
+    text-transform: uppercase;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 20px;
+    padding: 8px 15px;
+    border-radius: 15px;
+    transition: all 0.3s;
+}
+
+nav a:hover {
+    background-color: var(--white);
+    color: var(--primary-purple);
+}
+
+/* Контейнер */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+/* Картка авторизації / Профілю */
+.auth-card {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem;
+    border-radius: 50px; /* Дуже закруглені краї */
+    border: 8px solid var(--white); /* Товста біла рамка як на кнопках */
+    box-shadow: var(--shadow);
+    max-width: 450px;
+    width: 100%;
+    text-align: center;
+}
+
+.auth-card h2 {
+    color: var(--primary-purple);
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 900;
+}
+
+/* Поля форми */
+.form-fields p {
+    width: 100%; /* Змушуємо абзац займати всю ширину картки */
+    text-align: center; /* Центруємо лейбли (написи над полями) */
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+
+.form-fields label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: var(--primary-purple);
+}
+
+.form-fields input {
+    width: 100%;
+    max-width: 350px; /* Обмежуємо ширину, щоб інпут не був "ковбасою" на всю ширину */
+    padding: 15px 25px;
+    box-sizing: border-box;
+    border: 4px solid #e0f4ff;
+    background-color: #f0f9ff;
+    border-radius: 25px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+    
+    /* Головний секрет центрування інпутів: */
+    display: block;
+    margin: 0 auto; 
+}
+
+.auth-page {
+    display: flex;
+    justify-content: center; /* Центрування по горизонталі */
+    align-items: center;     /* Центрування по вертикалі */
+    min-height: 80vh;        /* Щоб картка була по центру екрана, а не тільки зверху */
+    width: 100%;
+    padding: 20px;           /* Відступ для мобільних пристроїв */
+    box-sizing: border-box;
+}
+
+.form-fields input:focus {
+    border-color: var(--primary-purple);
+    background-color: var(--white);
+    transform: scale(1.02); /* Додав легкий ефект збільшення при кліку для ігрового відчуття */
+}
+.form-fields label {
+    display: block;
+    margin-bottom: 8px;
+    margin-left: 10px;
+    font-weight: 700;
+    color: var(--primary-purple);
+}
+
+.form-fields input {
+    width: 100%;
+    padding: 15px 25px;
+    box-sizing: border-box;
+    border: 4px solid #e0f4ff;
+    background-color: #f0f9ff;
+    border-radius: 25px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.form-fields input:focus {
+    border-color: var(--primary-purple);
+    background-color: var(--white);
+}
+
+/* Велика ігрова кнопка */
+.auth-button {
+    background: var(--primary-gradient);
+    color: var(--white);
+    border: none;
+    padding: 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1.3rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 8px 0 #5849c4; /* Ефект об'ємної іграшкової кнопки */
+    transition: all 0.2s;
+    margin-top: 20px;
+}
+
+.auth-button:hover {
+    transform: translateY(2px);
+    box-shadow: 0 6px 0 #5849c4;
+    filter: brightness(1.1);
+}
+
+.auth-button:active {
+    transform: translateY(8px);
+    box-shadow: none;
+}
+
+/* Помилки */
+.errorlist {
+    color: #ff6b6b;
+    list-style: none;
+    padding: 10px;
+    background: #fff0f0;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    border: 2px solid #ff6b6b;
+}
+
+/* Адаптивність */
+@media (max-width: 600px) {
+    .auth-card {
+        padding: 2rem 1.5rem;
+        border-radius: 35px;
+        border-width: 5px;
+    }
+}
+
+.success-container {
+    padding: 20px;
+    text-align: center;
+}
+
+.success-icon {
+    font-size: 4rem;
+    margin-bottom: 15px;
+    animation: bounce 2s infinite;
+}
+
+.success-text {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: #a3e4c0; /* Твій м'ятний колір */
+    margin-bottom: 10px;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Додатковий стиль для компактної кнопки в навігації */
+.nav-auth-btn {
+    background: var(--primary-gradient);
+    color: var(--white) !important;
+    padding: 8px 20px !important;
+    border-radius: 20px !important;
+    font-size: 0.9rem !important;
+    font-weight: 900;
+    text-transform: uppercase;
+    box-shadow: 0 4px 0 #5849c4;
+    transition: all 0.2s;
+    display: inline-block;
+    margin-left: 20px;
+}
+.nav-auth-btn:hover {
+    transform: translateY(1px);
+    box-shadow: 0 3px 0 #5849c4;
+    filter: brightness(1.1);
+    background-color: transparent !important; /* Відміна стандартного ховера */
+}
+.nav-auth-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}

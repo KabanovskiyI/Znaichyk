@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Підтвердіть Email{% endblock %}
+
+{% block content %}
+<main class="auth-page">
+    <div class="auth-card status-card success-card">
+        <div class="status-icon">📧</div>
+        <h2>Майже готово!</h2>
+        <p>Ми відправили лист на вашу пошту. Будь ласка, натисніть на посилання в листі, щоб активувати акаунт.</p>
+        
+        <div class="auth-footer">
+            <p>Не бачите листа? Перевірте папку <b>Спам</b>.</p>
+            <a href="/" class="auth-button secondary">На головну</a>
+        </div>
+    </div>
+</main>
+{% endblock %}

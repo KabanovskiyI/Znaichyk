@@ -89,3 +89,63 @@
   opacity: 1;
   transform: scale(1);
 }
+
+.profileButton {
+  /* Позиціювання залишаємо */
+  position: absolute;
+  top: 30px; /* Трохи опустив, бо кнопка стала більшою */
+  right: 30px;
+  z-index: 100;
+  
+  /* НОВИЙ РОЗМІР: робимо її помітною */
+  width: 150px;
+  height: auto;
+  
+  /* ПРИБИРАЄМО ПІДЛОЖКУ */
+  background: none;
+  background-color: transparent !important;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  
+  /* Важливо: прибираємо внутрішні відступи тега button */
+  padding: 0;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  outline: none; /* Прибираємо дефолтну обводку при фокусі */
+  
+  /* Анімація ховеру */
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Ефект при наведенні */
+.profileButton:hover {
+  transform: scale(1.1); /* Легке збільшення всієї кнопки */
+}
+
+/* Ефект при натисканні */
+.profileButton:active {
+  transform: scale(0.95);
+}
+
+.profileIcon {
+  /* Картинка займає 100% розміру батьківської кнопки */
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Щоб зберегти пропорції вашої намальованої кнопки */
+  display: block;
+}
+
+/* Адаптив під дрібні екрани */
+@media (max-width: 600px) {
+  .profileButton {
+    top: 20px;
+    right: 20px;
+    /* На мобілках робимо її трохи меншою, але все одно більшою ніж було раніше */
+    width: 60px;
+    height: 60px;
+  }
+}

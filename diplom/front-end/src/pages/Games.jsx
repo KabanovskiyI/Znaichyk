@@ -6,7 +6,7 @@ import Play from '/assets/images/play.svg';
 import Header from '../components/ui/header.jsx';
 import GameBackground from '../components/ui/background.jsx';
 import VictoryScreen from '../components/ui/VictoryScreen.jsx';
-
+import ProfileIcon from '/assets/images/Background/Profile.svg';
 // Імпорти ігор
 import Feed from '../components/games/level_1/feed.jsx';
 import ABC from '../components/games/level_1/abc.jsx';
@@ -22,10 +22,10 @@ import Pipes from '../components/games/level_3/pipes.jsx';
 import Balance from '../components/games/level_3/mathBalanceGame.jsx';
 
 const ALL_GAMES_REGISTRY = {
-  language: { lvl_1: ABC, lvl_2: Syllables, lvl_3: Match },
-  math: { lvl_1: OrderOfObjects, lvl_2: Baloons, lvl_3: Balance },
+  language: { lvl_1: ABC, lvl_2: Syllables, lvl_3: Bubble },
+  math: { lvl_1: Feed, lvl_2: Baloons, lvl_3: Balance },
   logic: { lvl_1: OddOneOut, lvl_2: Puzzle, lvl_3: Pipes },
-  memory: { lvl_1: Feed, lvl_2: Simon, lvl_3: Bubble }
+  memory: { lvl_1: OrderOfObjects, lvl_2: Simon, lvl_3: Match }
 };
 
 const Games = () => {
@@ -42,11 +42,11 @@ const Games = () => {
   // НОВИЙ СТАН: чи це перший захід на сторінку
   const [hasStartedOnce, setHasStartedOnce] = useState(false);
 
-  // 1. Оновлений fetchSequence (тепер повертає дані, щоб ми могли використати їх одразу)
+  // 1. Оновлений fetchSequence (тепер повертає дані, щоб ми могли використати їх одразу) http://localhost:8000
   const fetchSequence = useCallback(async () => {
     setIsLoading(true);
     try {
-      const response = await fetch(`http://localhost:8000/game/config/`, {
+      const response = await fetch(`/game/config/`, {
         credentials: 'include'
       });
       const data = await response.json();
@@ -118,7 +118,7 @@ const Games = () => {
 
     try {
       // 1. Повідомляємо бекенд
-      await fetch(`http://localhost:8000/game/complete/`, { credentials: 'include' });
+      await fetch(`/game/complete/`, { credentials: 'include' });
       
       // 2. Отримуємо новий пул і чекаємо на результат
       const newPool = await fetchSequence();
@@ -147,10 +147,22 @@ const Games = () => {
     return <div className={styles.loadingScreen}>Завантаження...</div>;
   }
 
+  const handleProfileRedirect = () => {
+    window.location.href = '/users/profile/'; 
+  };
+
   return (
     <div className={styles.gameMainLayout}>
       <GameBackground step={bgStep} />
-
+      {!isLoading && (
+        <button 
+          className={styles.profileButton} 
+          onClick={handleProfileRedirect}
+          title="Перейти до профілю"
+        >
+          <img src={ProfileIcon} alt="Profile" className={styles.profileIcon} />
+        </button>
+      )}
       {isVictory && <VictoryScreen onFinish={handleRestart} />}
 
       {isPlaying && !isVictory && <Header currentStep={progress} max={5} />}

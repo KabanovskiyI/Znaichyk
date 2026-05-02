@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Помилка активації{% endblock %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'users/css/email.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="auth-page">
+    <div class="auth-card status-card">
+        <div class="status-icon">⚠️</div>
+        <h2>Посилання недійсне</h2>
+        <p>Схоже, термін дії посилання закінчився або воно вже було використано.</p>
+        <div class="auth-footer">
+            <a href="{% url 'register' %}" class="auth-button">Спробувати зареєструватися знову</a>
+        </div>
+    </div>
+</main>
+{% endblock %}

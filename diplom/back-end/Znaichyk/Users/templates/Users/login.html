@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<main class="auth-page">
+    <div class="auth-card">
+        <h1>Вхід</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-fields">
+                {% if form.errors %}
+                    <div class="error-msg">Невірна пошта або пароль</div>
+                    <!-- Твоя умова: якщо помилка, пропонуємо скинути -->
+                    <div class="forgot-password-link">
+                        <a href="{% url 'password_reset_request' %}">Забули пароль?</a>
+                    </div>
+                {% endif %}
+                
+                <div class="field-group">
+                    <label>Email:</label>
+                    {{ form.email }}
+                </div>
+                <div class="field-group">
+                    <label>Пароль:</label>
+                    {{ form.password }}
+                </div>
+            </div>
+            <button type="submit" class="auth-button">Увійти</button>
+        </form>
+        <div class="auth-footer">
+            <p>Немає акаунту? <a href="{% url 'register' %}">Створити акаунт</a></p>
+        </div>
+    </div>
+</main>
+{% endblock %}
