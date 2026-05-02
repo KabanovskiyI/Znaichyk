@@ -11,6 +11,9 @@
         <p>Пам'ять: <b>{{ user.profile.memory }}</b></p>
         <p>Завершено сесій: <b>{{ user.profile.completed_sessions }}</b></p>
     </div>
-    <br><br>
+
+    <div class="profile-actions">
+        <a href="{% url 'logout' %}" class="nav-auth-btn profile-logout-btn">Вийти</a>
+    </div>
 </main>
 {% endblock %}

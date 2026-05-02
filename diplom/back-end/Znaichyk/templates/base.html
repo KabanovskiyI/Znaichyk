@@ -19,7 +19,6 @@
             {% if user.is_authenticated %}
                 <a href="{% url 'profile' %}" class="profile-link">Привіт, {{ user.email }}</a>
                 <a href="/play/">Грати</a>
-                <a href="{% url 'logout' %}">Вийти</a>
             {% else %}
                 <a href="{% url 'login' %}" class="nav-auth-btn">Увійти</a>
             {% endif %}
