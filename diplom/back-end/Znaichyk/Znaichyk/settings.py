@@ -21,11 +21,11 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = 'kabanovskiy.ivan@gmail.com' 
+EMAIL_HOST_USER = 'znaichyk@gmail.com' 
 
-EMAIL_HOST_PASSWORD = 'rkxfshzdxpqzcgez' 
+EMAIL_HOST_PASSWORD = 'hysshbbiorqgaadx' 
 
-DEFAULT_FROM_EMAIL = 'Znaichyk Team <kabanovskiy.ivan@gmail.com>'
+DEFAULT_FROM_EMAIL = 'Znaichyk Team <znaichyk@gmail.com>'
 # Application definition
 INSTALLED_APPS = [
     'Users',
@@ -76,7 +76,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'Znaichyk.wsgi.application'
-
 
 # Database
 DATABASES = {
