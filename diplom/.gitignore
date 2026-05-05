@@ -10,7 +10,6 @@ pyvenv.cfg
 *.pyc
 
 # Django
-db.sqlite3
 media/
 staticfiles/
 .env
