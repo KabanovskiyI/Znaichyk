@@ -18,3 +18,5 @@
 JavaScript, React, Django, SQLite3
 
 ## Опублікований продукт
+
+https://diplomznaichyk.pythonanywhere.com/
